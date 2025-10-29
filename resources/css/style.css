@@ -1,0 +1,270 @@
+:root {
+    --bg-light: #f2f9f2;
+    --green-dark: #0e4d2b;
+    --green-mid: #1ba55c;
+    --green-light: #a0d6a5;
+    --accent: #c9f0c9;
+    --text-dark: #1b3a2a;
+}
+
+/* Reset & Base */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: "Inter", sans-serif;
+    background: var(--bg-light);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: linear-gradient(90deg, var(--green-dark), var(--green-mid));
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    border-radius: 0 0 20px 20px;
+}
+.header-left { display: flex; align-items: center; gap: 16px; }
+.logo { height: 56px; border-radius: 12px; }
+.brand-title { font-family: "Merriweather", serif; font-weight: 700; font-size: 1.5rem; }
+.header-center { flex: 1; display: flex; justify-content: center; }
+.search-bar { display: flex; max-width: 500px; width: 100%; }
+.search-input {
+    flex: 1; padding: 12px 18px;
+    border: none; border-radius: 999px 0 0 999px;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.search-btn {
+    padding: 12px 18px;
+    border: none; border-radius: 0 999px 999px 0;
+    background: var(--green-mid);
+    color: #fff; font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+.search-btn:hover {
+    background: var(--green-dark);
+    transform: scale(1.05);
+}
+.nav-links { display: flex; gap: 16px; }
+.nav-link { text-decoration: none; color: #fff; font-weight: 600; transition: color 0.3s ease; }
+.nav-link:hover { color: var(--accent); }
+
+/* Main e Corpo Animado */
+main {
+    position: relative;
+    flex: 1 0 auto;
+    overflow: hidden;
+    background: radial-gradient(circle at 20% 30%, var(--green-light) 0%, var(--bg-light) 80%);
+    padding: 60px 20px;
+}
+.main-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(1200px 400px at 15% 15%, rgba(26,165,92,0.08), transparent 20%),
+                radial-gradient(1000px 300px at 85% 80%, rgba(14,77,43,0.05), transparent 20%);
+    z-index: 0;
+}
+.header-buttons {
+    display: flex;
+    gap: 10px;
+    margin-left: 20px; /* Espaço entre nav-links e os botões */
+}
+
+.header-btn {
+    padding: 8px 18px;
+    background-color: #fff; /* Preenchimento branco */
+    color: #2ecc71; /* Verde principal do tema */
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+
+.header-btn:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+}
+
+.logo-wrapper {
+    background-color: rgb(255, 255, 255); /* Branco quase transparente */
+    border-radius: 50%; /* Forma circular */
+    padding: 10px; /* Espaço entre a logo e o círculo */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-wrapper .logo {
+    width: 50px; /* Ajuste o tamanho conforme necessário */
+    height: auto;
+    display: block;
+    border-radius: 50%; /* Para garantir que fique redondo */
+}
+
+
+
+/* Banner */
+.banner {
+    text-align: center;
+    padding: 50px 30px;
+    
+    /* Imagem de fundo */
+    background-image: url('../img/plantas.jpg'); /* substitua pelo caminho da sua imagem */
+    background-size: cover;        /* cobre toda a área do banner */
+    background-position: center;   /* centraliza a imagem */
+    background-repeat: no-repeat;  /* evita repetição */
+    
+    /* Opcional: efeito de overlay para melhor legibilidade do texto */
+    position: relative;
+    border-radius: 20px;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.08);
+    margin-bottom: 50px;
+    color: white; /* cor do texto sobre a imagem */
+}
+.banner-title {
+    font-family: "Merriweather", serif;
+    font-size: clamp(2rem, 4vw, 3.8rem);
+    font-weight: 700;
+
+    /* Faz o texto transparente e mostra a imagem por trás */
+    background-color: #fff; /* substitua pelo caminho da sua imagem */
+    background-size: cover;       /* cobre toda a área do texto */
+    background-position: center;  /* centraliza a imagem */
+    -webkit-background-clip: text;
+    color: transparent;
+
+    animation: fadeInUp 1s ease-out;
+}
+.banner-subtitle {
+    margin-top: 12px;
+    font-size: 1.2rem;
+
+    color: #000; /* cor da letra */
+    background-color: rgba(255, 255, 255, 0.5);/* fundo branco sem perder suavidade */
+    padding: 5px 15px; /* espaço entre a letra e a borda */
+    border-radius: 10px; /* cantos arredondados */
+    display: inline-block; /* para o fundo envolver só o texto */
+    animation: fadeIn 2s ease-in;
+}
+
+
+/* Cards */
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    font-family: "Merriweather", serif;
+    color: var(--green-dark);
+    margin-bottom: 40px;
+}
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+}
+.card {
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+    padding: 30px;
+    width: 28%;
+    min-width: 200px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+/* Cards */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    position: relative;
+}
+
+.card {
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+    padding: 30px;
+    width: 28%;
+    min-width: 200px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden; /* importante para conter as folhas dentro do card */
+}
+
+.card:hover { 
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+    background: rgba(240, 255, 240, 0.98);
+}
+
+/* Imagem dentro do card com efeito de flutuação */
+.card-image {
+    width: 100%;
+    height: 300px;
+    border-radius: 30px;
+    margin-bottom: 10px;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-image {
+    transform: scale(1.1) translateY(-5px);
+}
+
+/* Efeito de folhas caindo sobre o card */
+.card::after {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230e4d2b'%3E%3Cpath d='M12 2L21 9V15L12 22L3 15V9L12 2Z'/%3E%3C/svg%3E") no-repeat center/contain;
+    opacity: 0;
+    animation: fallCard 2s linear infinite;
+    pointer-events: none; /* para não atrapalhar o clique */
+}
+
+.card:hover::after {
+    opacity: 0.8;
+}
+.card-title { color: var(--green-mid); font-size: 1.6rem; font-weight: 700; }
+.card-description { line-height: 1.7; color: var(--text-dark); margin-top: 8px; }
+
+/* Footer */
+.footer {
+    background: linear-gradient(90deg, var(--green-dark), var(--green-mid));
+    color: #fff;
+    text-align: center;
+    padding: 50px 20px;
+}
+.footer-text { font-weight: 600; margin-bottom: 6px; }
+.footer-disclaimer { font-size: 0.9rem; opacity: 0.85; }
+.social-icons { margin-top: 14px; }
+.social-link { margin: 0 12px; font-size: 1.5rem; text-decoration: none; color: #fff; transition: transform 0.3s ease, color 0.3s ease; }
+.social-link:hover { transform: scale(1.3) rotate(10deg); color: var(--accent); }
+
+/* Animations */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Folhas caindo */
+.falling-leaf {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230e4d2b'%3E%3Cpath d='M12 2L21 9V15L12 22L3 15V9L12 2Z'/%3E%3C/svg%3E") no-repeat center/contain;
+    opacity: 0.8;
+    z-index: 2;
+    animation: fall linear infinite;
+}
+@keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
