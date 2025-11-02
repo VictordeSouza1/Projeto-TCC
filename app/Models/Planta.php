@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class plantas extends Model
+class Planta extends Model
 {
     //
 }
