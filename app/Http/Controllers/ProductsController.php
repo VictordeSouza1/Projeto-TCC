@@ -12,7 +12,10 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        /*
+        $products = Product::all();
+        return view('product.index', compact('products'));
+        */
     }
 
     /**
@@ -20,7 +23,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        /*
+        return view('product.create');
+        */
     }
 
     /**
@@ -28,38 +33,94 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*
+        $product = new Product();
+        
+        $product->description = $request->description;
+        $product->images = $request->images; 
+        $product->price = $request->price; 
+        $product->save();
+
+        return redirect()->route('product.index')->with('success', 'Produto criado com sucesso!');
+        */
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Products $products)
+    public function show(string $id)
     {
-        //
+        /*
+        $product = Product::find($id);
+
+        if (isset($product)) {
+            return view('product.show', compact('product'));
+        }
+
+        return redirect()->route('product.index')->with('error', 'Produto não encontrado.');
+        */
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Products $products)
+    public function edit(string $id)
     {
-        //
+        /*
+        $product = Product::find($id);
+
+        if (isset($product)) {
+            
+            return view('product.edit', compact('product'));
+        }
+
+        return redirect()->route('product.index')->with('error', 'Produto não encontrado.');
+        */
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Products $products)
+    public function update(Request $request, string $id )
     {
-        //
+        /*
+        $product = Product::find($id);
+
+        if (isset($product)) {
+            // Atualização dos campos:
+            $product->description = $request->description;
+            
+            // Lidar com atualização de imagens
+            $product->images = $request->images; 
+            
+            $product->price = $request->price; 
+            
+            $product->save();
+
+            // Redireciona de volta para os detalhes do produto
+            return redirect()->route('product.show', $product->product_id)->with('success', 'Produto atualizado com sucesso!');
+        }
+
+        // Caso o produto não seja encontrado
+        return redirect()->route('product.index')->with('error', 'Erro ao atualizar: Produto não encontrado.');
+        */
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Products $products)
+    public function destroy(string $id)
     {
-        //
+        /*
+        $product = Product::find($id);
+
+        if (isset($product)) {
+            
+            $product->delete();
+            return redirect()->route('product.index')->with('success', 'Produto deletado com sucesso!');
+        }
+
+        return redirect()->route('product.index')->with('error', 'Erro ao deletar: Produto não encontrado.');
+        */
     }
 }

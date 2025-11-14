@@ -12,7 +12,11 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+
+        /*
+          $roles = Role::all();return view('role.index', compact('roles'));
+        */
+        
     }
 
     /**
@@ -20,7 +24,10 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        /*
+        return view('planta.create');
+        */
+        
     }
 
     /**
@@ -28,38 +35,82 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*
+        $role = new Role();
+        $role->nome = $request->nome;
+        $role->save();
+
+        return redirect()->route('role.index');
+        */
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Role $role)
+    public function show(string $id)
     {
-        //
+        /*
+            $role = Role::find($id);
+
+            if(isset($role)) {
+                return view('role.show', compact('role'));
+            }
+
+            return redirect()->route('role.index');
+        */
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Role $role)
+    public function edit(string $id)
     {
-        //
+        /*
+        $role = Role::find($id);
+
+        if(isset($role)) {
+            return view('role.edit', compact('role'));
+        }
+
+        return redirect()->route('role.index');
+        */
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, string $id)
     {
-        //
+        /*
+        $role = Role::find($id);
+
+        if(isset($role)) {
+            $role->nome = $request->nome;
+            $role->save();   
+        }
+
+        return redirect()->route('planta.index');
+        */
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Role $role)
+    public function destroy(string $id)
     {
-        //
+        /*
+        $role = Role::find($id);
+
+        if(isset($role)) {
+            $role->delete();
+        }
+
+        return redirect()->route('role.index');
+        */
+        
     }
 }
