@@ -6,14 +6,19 @@
     <title>Enciclopédia - Natureza em Casa</title>
 
     <link rel="icon" href="{{ asset('img/Natureza-removebg-preview.png') }}" type="image/png">
+
+    {{-- CSS exclusivo desta página --}}
     <link rel="stylesheet" href="{{ asset('css/encyclopedia.css') }}">
 
+    {{-- Fontes --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
 </head>
 
 <body>
+
+    {{-- HEADER --}}
     <header class="header">
         <div class="header-left">
             <div class="logo-wrapper">
@@ -34,21 +39,27 @@
             <a href="{{ url('/') }}" class="nav-link">Loja</a>
         </nav>
 
-         <div class="header-buttons">
+        <div class="header-buttons">
             <button class="header-btn">Entrar</button>
         </div>
     </header>
-        </div>
-    </header>
 
-    <!-- Banner -->
+    {{-- BANNER --}}
     <section class="banner">
         <h1 class="banner-title">Enciclopédia</h1>
     </section>
 
-    <!-- LISTAGEM DINÂMICA DE PLANTAS -->
+    {{-- LISTAGEM DE PLANTAS --}}
     <section class="products-section">
-        <h2 class="section-title">Plantas</h2>
+
+        {{-- Título + Botão --}}
+        <div class="title-row">
+            <h2 class="section-title">Plantas</h2>
+
+            <a href="{{ route('planta.create') }}" class="btn-add">
+                + Cadastrar Planta
+            </a>
+        </div>
 
         <div class="carousel-wrapper">
             <button class="carousel-btn left-btn">❮</button>
@@ -59,36 +70,34 @@
                     @foreach ($plantas as $planta)
                         <div class="card">
 
-                            <!-- Imagem padrão TEMPORÁRIA até você adicionar imagem no DB -->
-                            <img src="{{ asset('img/default-planta.jpg') }}" alt="Imagem Planta" class="card-image">
+                            {{-- TEMPORÁRIO — até colocar upload --}}
+                            <img src="{{ asset('img/default-planta.jpg') }}"
+                                alt="Imagem Planta"
+                                class="card-image">
 
                             <h3 class="card-title">{{ $planta->nome }}</h3>
                             <p class="card-description">{{ $planta->descricao }}</p>
 
-                           <!-- BOTÕES DENTRO DO CARD -->
-<a href="{{ route('planta.create') }}" class="header-btn btn-create">
-                            Cadastrar Planta
-                        </a>
+                            {{-- AÇÕES --}}
+                            <div class="card-buttons">
 
-                        <div style="margin-top: 10px; display: flex; gap: 6px; flex-direction: column;">
-                            
-                            <a href="{{ route('planta.show', $planta->id) }}" class="header-btn">
-                                Ver Mais
-                            </a>
+                                <a href="{{ route('planta.show', $planta->id) }}" class="header-btn">
+                                    Ver Mais
+                                </a>
 
-                            <a href="{{ route('planta.edit', $planta->id) }}" class="header-btn btn-edit">
-                                Editar
-                            </a>
+                                <a href="{{ route('planta.edit', $planta->id) }}" class="header-btn btn-edit">
+                                    Editar
+                                </a>
 
-                            <form action="{{ route('planta.destroy', $planta->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button class="header-btn btn-remove">
-                                    Remover
-                                </button>
-                            </form>
-                        </div>
+                                <form action="{{ route('planta.destroy', $planta->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="header-btn btn-remove">
+                                        Remover
+                                    </button>
+                                </form>
 
+                            </div>
                         </div>
                     @endforeach
 
@@ -97,11 +106,13 @@
 
             <button class="carousel-btn right-btn">❯</button>
         </div>
+
     </section>
 
-    <!-- CATEGORIAS e ALFABETO (inalterado) -->
+    {{-- CATEGORIAS --}}
     <section class="categories-section">
         <h2 class="section-title">Categorias</h2>
+
         <div class="categories-grid">
             <a href="#" class="category-tag">Babosa</a>
             <a href="#" class="category-tag">Manjericão</a>
@@ -122,10 +133,11 @@
         </div>
     </section>
 
-    <!-- Rodapé -->
+    {{-- FOOTER --}}
     <footer class="footer">
         <p class="footer-text">© 2025 Natureza em Casa. Todos os direitos reservados.</p>
         <p class="footer-disclaimer">As informações aqui são educativas e não substituem orientação profissional de saúde.</p>
+
         <div class="social-icons">
             <a href="#" class="social-link"><span>🌐</span></a>
             <a href="#" class="social-link"><span>🐦</span></a>
@@ -134,6 +146,8 @@
         </div>
     </footer>
 
+    {{-- JS --}}
     <script src="{{ asset('js/encyclopedia.js') }}"></script>
+
 </body>
 </html>
