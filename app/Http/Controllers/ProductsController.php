@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product; // corrigido: singular
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Exibe todos os produtos.
      */
     public function index()
     {
@@ -17,7 +18,7 @@ class ProductsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Mostra o formulário para criar um novo produto.
      */
     public function create()
     {
@@ -25,82 +26,107 @@ class ProductsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Armazena um novo produto no banco.
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nome'      => 'required|string|max:255',
+            'descricao' => 'required|string',
+            'preco'     => 'required|numeric',
+            'imagem'    => 'nullable|image|mimes:jpg,jpeg,png,webp',
+        ]);
+
         $product = new Product();
-        $product->description = $request->description;
-        $product->images = $request->images; 
-        $product->price = $request->price; 
+        $product->name        = $request->nome;
+        $product->description = $request->descricao;
+        $product->price       = $request->preco;
+
+        // Upload da imagem
+        if ($request->hasFile('imagem')) {
+            $product->image = $request->file('imagem')->store('products', 'public');
+        }
+
         $product->save();
 
         return redirect()->route('product.index')->with('success', 'Produto criado com sucesso!');
     }
 
     /**
-     * Display the specified resource.
+     * Mostra os detalhes de um produto.
      */
-    public function show(string $id)
+    public function show($id)
     {
         $product = Product::find($id);
 
-        if ($product) {
-            return view('product.show', compact('product'));
+        if (!$product) {
+            return redirect()->route('product.index')->with('error', 'Produto não encontrado.');
         }
 
-        return redirect()->route('product.index')->with('error', 'Produto não encontrado.');
+        return view('product.show', compact('product'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Mostra o formulário para editar um produto.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         $product = Product::find($id);
 
-        if ($product) {
-            return view('product.edit', compact('product'));
+        if (!$product) {
+            return redirect()->route('product.index')->with('error', 'Produto não encontrado.');
         }
 
-        return redirect()->route('product.index')->with('error', 'Produto não encontrado.');
+        return view('product.edit', compact('product'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Atualiza os dados do produto.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $product = Product::find($id);
 
-        if ($product) {
-            $product->description = $request->description;
-            $product->images = $request->images; 
-            $product->price = $request->price; 
-            $product->save();
-
-            return redirect()->route('product.show', $product->id)
-                             ->with('success', 'Produto atualizado com sucesso!');
+        if (!$product) {
+            return redirect()->route('product.index')->with('error', 'Produto não encontrado.');
         }
 
-        return redirect()->route('product.index')
-                         ->with('error', 'Erro ao atualizar: Produto não encontrado.');
+        $request->validate([
+            'nome'      => 'required|string|max:255',
+            'descricao' => 'required|string',
+            'preco'     => 'required|numeric',
+            'imagem'    => 'nullable|image|mimes:jpg,jpeg,png,webp',
+        ]);
+
+        $product->name        = $request->nome;
+        $product->description = $request->descricao;
+        $product->price       = $request->preco;
+
+        if ($request->hasFile('imagem')) {
+            $product->image = $request->file('imagem')->store('products', 'public');
+        }
+
+        $product->save();
+
+        return redirect()->route('product.show', $product->id)->with('success', 'Produto atualizado com sucesso!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove um produto.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         $product = Product::find($id);
 
-        if ($product) {
-            $product->delete();
-            return redirect()->route('product.index')
-                             ->with('success', 'Produto deletado com sucesso!');
+        if (!$product) {
+            return redirect()->route('product.index')->with('error', 'Produto não encontrado.');
         }
 
-        return redirect()->route('product.index')
-                         ->with('error', 'Erro ao deletar: Produto não encontrado.');
+        // Se quiser deletar a imagem ao excluir o produto:
+        // Storage::disk('public')->delete($product->image);
+
+        $product->delete();
+
+        return redirect()->route('product.index')->with('success', 'Produto deletado com sucesso!');
     }
 }

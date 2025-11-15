@@ -17,7 +17,12 @@
     <header class="header">
         <div class="header-left">
             <div class="logo-wrapper">
-                <img src="{{ asset('img/Natureza-removebg-preview.png') }}" alt="Logo Natureza em Casa" class="logo">
+                 <a href="/"> 
+                <img src="{{ asset('img/Natureza-removebg-preview.png') }}" 
+                     alt="Logo Natureza em Casa" 
+                     class="logo"
+                     style="cursor: pointer;">
+                 </a>
             </div>
         </div>
 
@@ -100,9 +105,15 @@
                     Salvar
                 </button>
 
+                    <div style="text-align: center; margin-bottom: 10px;">
                     <a href="{{ route('planta.index') }}"
-                       style="text-align: center; margin-top: 10px; color: var(--green-dark); font-weight: 600;">
-                        Voltar
+                    style="font-size: 40px; color: black; text-decoration: none; padding: 5px 15px;">
+                        ←
+                    </a>
+                </div>
+
+
+        </div>
                     </a>
 
                 </form>

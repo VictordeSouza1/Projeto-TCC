@@ -4,35 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loja - Natureza em Casa</title>
-    <link rel="icon" href="img/Natureza-removebg-preview.png" type="image/png">
-    <link rel="stylesheet" href="css/loja.css">
+    <link rel="icon" href="{{ asset('img/Natureza-removebg-preview.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ asset('css/loja.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <header class="header">
         <div class="header-left">
             <div class="logo-wrapper">
-                <img src="img/Natureza-removebg-preview.png" alt="Logo Natureza em Casa" class="logo">
+                 <a href="/"> 
+                <img src="{{ asset('img/Natureza-removebg-preview.png') }}" 
+                     alt="Logo Natureza em Casa" 
+                     class="logo"
+                     style="cursor: pointer;">
+                 </a>
             </div>
         </div>
+
         <div class="header-center">
             <div class="search-bar">
                 <input type="text" class="search-input" placeholder="Busque por plantas, remédios...">
                 <button class="search-btn">🔍</button>
             </div>
         </div>
+
         <nav class="nav-links">
-            <a href="index.html" class="nav-link">Categorias</a>
+            <a href="{{ url('/') }}" class="nav-link">Categorias</a>
             <a href="#" class="nav-link">Ofertas</a>
-            <a href="loja.html" class="nav-link">Vender</a>
+            <a href="{{ route('product.create') }}" class="nav-link">Vender</a>
             <a href="#" class="nav-link">Contato</a>
         </nav>
+
         <div class="header-buttons">
             <button class="header-btn">Crie a sua Conta</button>
             <button class="header-btn">Entrar</button>
-            <!-- Carrinho no header -->
             <button class="header-btn cart-btn">🛒 0</button>
         </div>
     </header>
@@ -42,145 +50,77 @@
         <h1 class="banner-title">LOJA</h1>
     </section>
 
-    <!-- Produtos em Destaque -->
+    <!-- Produtos estáticos -->
     <section class="products-section">
-        <h2 class="section-title">Produtos em Destaque</h2>
-        <div class="carousel-wrapper">
-            <button class="carousel-btn left-btn">❮</button>
-            <div class="carousel-container">
-                <div class="card-carousel">
-                    <div class="card">
-                        <img src="img/planta3.jpg" alt="Girassol Natural" class="card-image">
-                        <h3 class="card-title">Girassol Natural</h3>
-                        <p class="card-description">Essência viva que ilumina ambientes.</p>
-                        <div class="price">R$ 29,90</div>
-                        <div class="rating">★ ★ ★ ★ ☆</div>
-                        <button class="add-cart-btn">🛒 Adicionar</button>
-                    </div>
-                    <div class="card">
-                        <img src="img/planta2.jpg" alt="Girassol Natural" class="card-image">
-                        <h3 class="card-title">Girassol Natural</h3>
-                        <p class="card-description">Essência viva que ilumina ambientes.</p>
-                        <div class="price">R$ 29,90</div>
-                        <div class="rating">★ ★ ★ ★ ☆</div>
-                        <button class="add-cart-btn">🛒 Adicionar</button>
-                    </div>
-                    <div class="card">
-                        <img src="img/planta3.jpg" alt="Girassol em Vaso" class="card-image">
-                        <h3 class="card-title">Girassol em Vaso</h3>
-                        <p class="card-description">Decoração e serenidade.</p>
-                        <div class="price">R$ 39,90</div>
-                        <div class="rating">★ ★ ★ ☆ ☆</div>
-                        <button class="add-cart-btn">🛒 Adicionar</button>
-                    </div>
-                    <div class="card">
-                        <img src="img/planta4.jpg" alt="Girassol Medicinal" class="card-image">
-                        <h3 class="card-title">Girassol Medicinal</h3>
-                        <p class="card-description">Remédio natural para harmonizar.</p>
-                        <div class="price">R$ 24,90</div>
-                        <div class="rating">★ ★ ★ ★ ★</div>
-                        <button class="add-cart-btn">🛒 Adicionar</button>
-                    </div>
-                    <div class="card">
-                        <img src="img/planta2.jpg" alt="Girassol Decorativo" class="card-image">
-                        <h3 class="card-title">Girassol Decorativo</h3>
-                        <p class="card-description">Transforme espaços em oásis.</p>
-                        <div class="price">R$ 34,90</div>
-                        <div class="rating">★ ★ ★ ☆ ☆</div>
-                        <button class="add-cart-btn">🛒 Adicionar</button>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-btn right-btn">❯</button>
-        </div>
-    </section>
 
-    <!-- Promoções -->
-    <section class="products-section">
-        <h2 class="section-title">Promoções</h2>
-        <div class="carousel-wrapper">
-            <button class="carousel-btn left-btn">❮</button>
-            <div class="carousel-container">
-                <div class="card-carousel">
-                    <div class="card">
-                        <img src="img/planta4.jpg" alt="Óleo Essencial" class="card-image">
-                        <h3 class="card-title">Óleo Essencial</h3>
-                        <p class="card-description">Purificador natural.</p>
-                        <div class="price">R$ 19,90</div>
-                        <div class="rating">★ ★ ★ ★ ☆</div>
-                        <button class="add-cart-btn">🛒 Adicionar</button>
-                    </div>
-                    <div class="card">
-                        <img src="img/planta2.jpg" alt="Girassol Natural" class="card-image">
-                        <h3 class="card-title">Girassol Natural</h3>
-                        <p class="card-description">Essência viva que ilumina ambientes.</p>
-                        <div class="price">R$ 29,90</div>
-                        <div class="rating">★ ★ ★ ☆ ☆</div>
-                        <button class="add-cart-btn">🛒 Adicionar</button>
-                    </div>
-                    <div class="card">
-                        <img src="img/remedios.jpg" alt="Kit Chás" class="card-image">
-                        <h3 class="card-title">Kit Chás</h3>
-                        <p class="card-description">Sabor e saúde.</p>
-                        <div class="price">R$ 49,90</div>
-                        <div class="rating">★ ★ ★ ★ ☆</div>
-                        <button class="add-cart-btn">🛒 Adicionar</button>
-                    </div>
-                    <div class="card">
-                        <img src="img/dec.jpg" alt="Suco Natural" class="card-image">
-                        <h3 class="card-title">Suco Natural</h3>
-                        <p class="card-description">Refrescante e saudável.</p>
-                        <div class="price">R$ 14,90</div>
-                        <div class="rating">★ ★ ★ ☆ ☆</div>
-                        <button class="add-cart-btn">🛒 Adicionar</button>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-btn right-btn">❯</button>
+        <div class="title-row" style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 class="section-title">Destaque</h2>
+              <a href="{{ route('product.create') }}" class="btn-add">
+                + Cadastrar Produto
+            </a>
         </div>
-    </section>
 
-    <!-- Novidades -->
-    <section class="products-section">
-        <h2 class="section-title">Novidades</h2>
         <div class="carousel-wrapper">
             <button class="carousel-btn left-btn">❮</button>
+
             <div class="carousel-container">
                 <div class="card-carousel">
+
+                    @php
+                        $product = (object)[
+                            'id' => 1,
+                            'name' => 'Bananeira',
+                            'description' => 'Uma planta muito resistente, ideal para quintais e jardins.',
+                            'price' => 49.90,
+                            'image' => 'products/banana.jpg'
+                        ];
+                    @endphp
+
                     <div class="card">
-                        <img src="img/pant.jpg" alt="Planta Medicinal" class="card-image">
-                        <h3 class="card-title">Planta Medicinal</h3>
-                        <p class="card-description">Saúde e vitalidade.</p>
-                        <div class="price">R$ 39,90</div>
+                        {{-- imagem --}}
+                        <img src="{{ asset('storage/' . $product->image) }}" 
+                             alt="{{ $product->name }}" 
+                             class="card-image">
+
+                        {{-- nome --}}
+                        <h3 class="card-title">{{ $product->name }}</h3>
+
+                        {{-- descrição --}}
+                        <p class="card-description">{{ Str::limit($product->description, 60) }}</p>
+
+                        {{-- preço --}}
+                        <div class="price">R$ {{ number_format($product->price, 2, ',', '.') }}</div>
+
                         <div class="rating">★ ★ ★ ★ ☆</div>
-                        <button class="add-cart-btn">🛒 Adicionar</button>
+                        <div class="card-buttons" style="display: flex; gap: 8px; margin-top: 10px;">
+                            
+                            <a href="{{ route('product.show', $product->id) }}"
+                            style="flex: 1; text-align: center; padding: 8px 0; background: #1ba55c; color: white; border-radius: 5px; text-decoration: none;">
+                                Ver Mais
+                            </a>
+
+                            <a href="{{ route('product.edit', $product->id) }}"
+                            style="flex: 1; text-align: center; padding: 8px 0; background: #ffc107; color: black; border-radius: 5px; text-decoration: none;">
+                                Editar
+                            </a>
+
+                            <form action="{{ route('product.destroy', $product->id) }}" method="POST" style="flex: 1; margin: 0;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                        style="width: 100%; padding: 8px 0; background: #dc3545; color: white; border-radius: 5px; border: none; cursor: pointer;">
+                                    Remover
+                                </button>
+                            </form>
+
+                        </div>
+
+
                     </div>
-                    <div class="card">
-                        <img src="img/plantas.jpg" alt="Máscara Facial" class="card-image">
-                        <h3 class="card-title">Máscara Facial</h3>
-                        <p class="card-description">Beleza natural.</p>
-                        <div class="price">R$ 29,90</div>
-                        <div class="rating">★ ★ ★ ☆ ☆</div>
-                        <button class="add-cart-btn">🛒 Adicionar</button>
-                    </div>
-                    <div class="card">
-                        <img src="img/planta3.jpg" alt="Creme Natural" class="card-image">
-                        <h3 class="card-title">Creme Natural</h3>
-                        <p class="card-description">Hidratação e cuidado.</p>
-                        <div class="price">R$ 34,90</div>
-                        <div class="rating">★ ★ ★ ★ ☆</div>
-                        <button class="add-cart-btn">🛒 Adicionar</button>
-                    </div>
-                    <div class="card">
-                        <img src="img/erv.jpg" alt="Girassol Natural" class="card-image">
-                        <h3 class="card-title">Girassol Natural</h3>
-                        <p class="card-description">Essência viva que ilumina ambientes.</p>
-                        <div class="price">R$ 29,90</div>
-                        <div class="rating">★ ★ ★ ★ ☆</div>
-                        <button class="add-cart-btn">🛒 Adicionar</button>
-                    </div>
+
                 </div>
             </div>
+
             <button class="carousel-btn right-btn">❯</button>
         </div>
     </section>
@@ -199,41 +139,19 @@
             <a href="#" class="category-tag">Espinheira</a>
             <a href="#" class="category-tag">Léptir</a>
         </div>
-          <h3 class="alphabet-title">Filtrar por letra:</h3>
+
+        <h3 class="alphabet-title">Filtrar por letra:</h3>
         <div class="alphabet-grid">
-            <a href="#" class="alphabet-tag">A</a>
-            <a href="#" class="alphabet-tag">B</a>
-            <a href="#" class="alphabet-tag">C</a>
-            <a href="#" class="alphabet-tag">D</a>
-            <a href="#" class="alphabet-tag">E</a>
-            <a href="#" class="alphabet-tag">F</a>
-            <a href="#" class="alphabet-tag">G</a>
-            <a href="#" class="alphabet-tag">H</a>
-            <a href="#" class="alphabet-tag">I</a>
-            <a href="#" class="alphabet-tag">J</a>
-            <a href="#" class="alphabet-tag">K</a>
-            <a href="#" class="alphabet-tag">L</a>
-            <a href="#" class="alphabet-tag">M</a>
-            <a href="#" class="alphabet-tag">N</a>
-            <a href="#" class="alphabet-tag">O</a>
-            <a href="#" class="alphabet-tag">P</a>
-            <a href="#" class="alphabet-tag">Q</a>
-            <a href="#" class="alphabet-tag">R</a>
-            <a href="#" class="alphabet-tag">S</a>
-            <a href="#" class="alphabet-tag">T</a>
-            <a href="#" class="alphabet-tag">U</a>
-            <a href="#" class="alphabet-tag">V</a>
-            <a href="#" class="alphabet-tag">W</a>
-            <a href="#" class="alphabet-tag">X</a>
-            <a href="#" class="alphabet-tag">Y</a>
-            <a href="#" class="alphabet-tag">Z</a>
+            @foreach(range('A','Z') as $letra)
+                <a href="#" class="alphabet-tag">{{ $letra }}</a>
+            @endforeach
         </div>
     </section>
 
-    <!-- Rodapé -->
     <footer class="footer">
         <p class="footer-text">© 2025 Natureza em Casa. Todos os direitos reservados.</p>
         <p class="footer-disclaimer">As informações aqui são educativas e não substituem orientação profissional de saúde.</p>
+
         <div class="social-icons">
             <a href="#" class="social-link"><span>🌐</span></a>
             <a href="#" class="social-link"><span>🐦</span></a>
@@ -242,6 +160,6 @@
         </div>
     </footer>
 
-    <script src="js/loja.js"></script>
+    <script src="{{ asset('js/loja.js') }}"></script>
 </body>
 </html>

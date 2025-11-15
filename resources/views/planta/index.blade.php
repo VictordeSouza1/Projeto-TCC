@@ -22,7 +22,12 @@
     <header class="header">
         <div class="header-left">
             <div class="logo-wrapper">
-                <img src="{{ asset('img/Natureza-removebg-preview.png') }}" alt="Logo Natureza em Casa" class="logo">
+                <a href="/"> 
+                <img src="{{ asset('img/Natureza-removebg-preview.png') }}" 
+                     alt="Logo Natureza em Casa" 
+                     class="logo"
+                     style="cursor: pointer;">
+                 </a>
             </div>
         </div>
 
@@ -36,7 +41,7 @@
         <nav class="nav-links">
             <a href="{{ url('/') }}" class="nav-link">Artigos</a>
             <a href="{{ url('/') }}" class="nav-link">Tratamentos</a>
-            <a href="{{ url('/') }}" class="nav-link">Loja</a>
+            <a href="{{ url('/product') }}" class="nav-link">Loja</a>
         </nav>
 
         <div class="header-buttons">

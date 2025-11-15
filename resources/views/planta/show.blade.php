@@ -15,7 +15,12 @@
     <header class="header">
         <div class="header-left">
             <div class="logo-wrapper">
-                <img src="{{ asset('img/Natureza-removebg-preview.png') }}" class="logo">
+                 <a href="/"> 
+                <img src="{{ asset('img/Natureza-removebg-preview.png') }}" 
+                     alt="Logo Natureza em Casa" 
+                     class="logo"
+                     style="cursor: pointer;">
+                 </a>
             </div>
             <div class="brand-title">Natureza em Casa</div>
         </div>
