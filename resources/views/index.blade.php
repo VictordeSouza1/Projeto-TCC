@@ -27,7 +27,7 @@
     <div class="header-right">
         <nav class="nav-links">
             <a href="#" class="nav-link">Artigos</a>
-            <a href="{{ url('/encyclopedia') }}" class="nav-link">Enciclopédia</a>
+            <a href="{{ url('/planta') }}" class="nav-link">Enciclopédia</a>
             <a href="#" class="nav-link">Loja</a>
         </nav>
     </div>

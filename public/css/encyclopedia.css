@@ -1,3 +1,6 @@
+/* -------------------------------------- */
+/*                 ROOT                   */
+/* -------------------------------------- */
 :root {
     --green-dark: #0e4d2b;
     --green-mid: #1a7a3e;
@@ -6,7 +9,9 @@
     --accent: #c9f0c9;
 }
 
-/* Geral */
+/* -------------------------------------- */
+/*                GLOBAL                  */
+/* -------------------------------------- */
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
@@ -15,7 +20,9 @@ body {
     color: var(--text-dark);
 }
 
-/* Header */
+/* -------------------------------------- */
+/*                HEADER                  */
+/* -------------------------------------- */
 .header {
     display: flex;
     justify-content: space-between;
@@ -26,22 +33,52 @@ body {
     box-shadow: 0 6px 20px rgba(0,0,0,0.15);
     border-radius: 0 0 20px 20px;
 }
-.header-left { display: flex; align-items: center; gap: 16px; }
-.logo { height: 56px; border-radius: 12px; }
-.brand-title { font-family: "Merriweather", serif; font-weight: 700; font-size: 1.5rem; }
-.header-center { flex: 1; display: flex; justify-content: center; }
-.search-bar { display: flex; max-width: 500px; width: 100%; }
+
+.header-left { 
+    display: flex; 
+    align-items: center; 
+    gap: 16px; 
+}
+
+.logo { 
+    height: 56px; 
+    border-radius: 12px; 
+}
+
+.brand-title {
+    font-family: "Merriweather", serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.header-center { 
+    flex: 1; 
+    display: flex; 
+    justify-content: center; 
+}
+
+.search-bar { 
+    display: flex; 
+    max-width: 500px; 
+    width: 100%; 
+}
+
 .search-input {
-    flex: 1; padding: 12px 18px;
-    border: none; border-radius: 999px 0 0 999px;
+    flex: 1;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 999px 0 0 999px;
     font-size: 0.95rem;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
+
 .search-btn {
     padding: 12px 18px;
-    border: none; border-radius: 0 999px 999px 0;
+    border: none;
+    border-radius: 0 999px 999px 0;
     background: var(--green-mid);
-    color: #fff; font-weight: 600;
+    color: #fff;
+    font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s ease, background 0.3s ease;
 }
@@ -49,9 +86,21 @@ body {
     background: var(--green-dark);
     transform: scale(1.05);
 }
-.nav-links { display: flex; gap: 20px; }
-.nav-link { color: #fff; text-decoration: none; font-weight: 600; transition: color 0.3s ease; }
-.nav-link:hover { color: var(--green-light); }
+
+.nav-links { 
+    display: flex; 
+    gap: 20px; 
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+.nav-link:hover { 
+    color: var(--green-light); 
+}
 
 .header-buttons {
     display: flex;
@@ -59,6 +108,7 @@ body {
     margin-left: 20px;
     align-items: center;
 }
+
 .header-btn {
     padding: 8px 18px;
     background-color: #fff;
@@ -87,132 +137,241 @@ body {
 .logo-wrapper .logo {
     width: 50px;
     height: auto;
-    display: block;
     border-radius: 50%;
 }
 
-/* Banner */
+/* -------------------------------------- */
+/*                BANNER                  */
+/* -------------------------------------- */
 .banner {
     text-align: center;
     padding: 50px 30px;
-     margin-top: 15px;
-    
-    /* Imagem de fundo */
-    background-image: url('../img/enci.jpg'); /* substitua pelo caminho da sua imagem */
-    background-size: cover;        /* cobre toda a área do banner */
-    background-position: center;   /* centraliza a imagem */
-    background-repeat: no-repeat;  /* evita repetição */
-    
-    /* Opcional: efeito de overlay para melhor legibilidade do texto */
+    margin-top: 15px;
+    background-image: url('../img/enci.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     position: relative;
     border-radius: 20px;
     box-shadow: 0 14px 40px rgba(0,0,0,0.08);
     margin-bottom: 50px;
-    color: white; /* cor do texto sobre a imagem */
+    color: white;
 }
 .banner-title {
-    position: relative;
     font-family: "Merriweather", serif;
     font-size: clamp(2.2rem, 4vw, 2.5rem);
     font-weight: 700;
-    color: #ffffff; /* branco puro */
-    text-shadow: 0 0 8px rgba(0, 0, 0, 0.6), 0 0 12px rgba(0, 255, 255, 0.3);
+    color: #fff;
+    text-shadow: 0 0 8px rgba(0,0,0,0.6),
+                 0 0 12px rgba(0,255,255,0.3);
     animation: fadeIn 2s ease-in;
 }
 
+/* -------------------------------------- */
+/*              CARROSSEL                 */
+/* -------------------------------------- */
+.products-section { 
+    max-width: 1200px; 
+    margin: 50px auto; 
+    padding: 0 20px; 
+}
 
-/* Carrosséis */
-.products-section { max-width:1200px; margin:50px auto; padding:0 20px; }
-.section-title { font-size:2rem; color:var(--green-dark); margin-bottom:25px; text-align:center; position:relative; }
-.carousel-wrapper { position:relative; margin-bottom:50px; }
-.carousel-container { overflow:hidden; }
-.card-carousel { display:flex; transition:transform 0.5s ease; gap:20px; }
-.card { min-width:250px; background:#fff; border-radius:12px; padding:15px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:0.3s; }
-.card:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.15); }
-.card-image { width:100%; height:200px; object-fit:cover; border-radius:8px; margin-bottom:10px; }
-.card-title { font-weight:600; color:var(--green-dark); margin-bottom:5px; }
-.card-description { font-size:0.9rem; color:#666; margin-bottom:10px; }
-.price { font-weight:700; color:var(--green-mid); font-size:1.1rem; }
+.section-title {
+    font-size: 2rem;
+    color: var(--green-dark);
+    margin-bottom: 30px;
+    text-align: center;
+}
 
-.carousel-btn { position:absolute; top:50%; transform:translateY(-50%); background:var(--green-mid); color:#fff; border:none; font-size:1.5rem; padding:10px; cursor:pointer; border-radius:50%; z-index:10; transition:0.3s; }
-.carousel-btn:hover { background:var(--green-dark); transform:translateY(-50%) scale(1.1); }
-.left-btn { left:-25px; }
-.right-btn { right:-25px; }
+.carousel-wrapper { 
+    position: relative; 
+    margin-bottom: 50px; 
+}
 
-/* Categorias */
-.categories-section { max-width:1200px; margin:60px auto; padding:0 20px; text-align:center; }
-.categories-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-bottom:30px; }
-.category-tag { display:inline-block; padding:12px 25px; background:#fff; color:var(--green-dark); font-weight:600; border-radius:25px; font-size:1rem; text-decoration:none; border:2px solid var(--green-mid); box-shadow:0 4px 12px rgba(0,0,0,0.08); transition:all 0.3s ease; }
-.category-tag:hover { background:var(--green-mid); color:#fff; transform:translateY(-3px) scale(1.05); box-shadow:0 8px 20px rgba(0,0,0,0.15); }
+.carousel-container { 
+    overflow: hidden; 
+}
 
-/* Alfabeto */
-.alphabet-title { font-size:1.2rem; color:var(--green-dark); margin-bottom:15px; }
-.alphabet-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-bottom:40px; }
-.alphabet-tag { display:inline-block; padding:8px 12px; background:#fff; color:var(--green-dark); font-weight:600; border-radius:20px; font-size:0.95rem; text-decoration:none; border:2px solid var(--green-mid); box-shadow:0 3px 8px rgba(0,0,0,0.08); transition:all 0.3s ease; }
-.alphabet-tag:hover { background:var(--green-mid); color:#fff; transform:translateY(-3px) scale(1.05); box-shadow:0 6px 15px rgba(0,0,0,0.12); }
+.card-carousel { 
+    display: flex; 
+    transition: transform 0.5s ease; 
+    gap: 20px; 
+}
 
-/* Rodapé */
-.footer { background:var(--green-dark); color:#fff; text-align:center; padding:30px 20px; margin-top:50px; }
-.footer-text { margin-bottom:10px; }
-.footer-disclaimer { font-size:0.85rem; margin-bottom:15px; }
-.social-icons { display:flex; justify-content:center; gap:15px; }
-.social-link { font-size:1.5rem; color:#fff; transition:0.3s; }
-.social-link:hover { color:var(--green-light); }
+.card {
+    min-width: 250px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
 
-/* Responsividade */
-@media(max-width:768px){ .card { min-width:180px; } .category-tag, .alphabet-tag { padding:10px 18px; font-size:0.9rem; } }
-@media(max-width:480px){ .card { min-width:150px; } .category-tag, .alphabet-tag { padding:8px 15px; font-size:0.85rem; } }
-/* Carrosséis */
-.products-section { max-width:1200px; margin:50px auto; padding:0 20px; }
-.section-title { font-size:2rem; color:var(--green-dark); margin-bottom:30px; text-align:center; position:relative; }
-.carousel-wrapper { position:relative; margin-bottom:50px; }
-.carousel-container { overflow:hidden; }
-.card-carousel { display:flex; transition:transform 0.5s ease; gap:20px; }
-.card { min-width:250px; background:#fff; border-radius:12px; padding:15px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:0.3s; }
-.card:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.15); }
-.card-image { width:100%; height:200px; object-fit:cover; border-radius:8px; margin-bottom:10px; }
-.card-title { font-weight:600; color:var(--green-dark); margin-bottom:5px; }
-.card-description { font-size:0.9rem; color:#666; margin-bottom:10px; }
-.price { font-weight:700; color:var(--green-mid); font-size:1.1rem; }
+.card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
 
-.carousel-btn { position:absolute; top:50%; transform:translateY(-50%); background:var(--green-mid); color:#fff; border:none; font-size:1.5rem; padding:10px; cursor:pointer; border-radius:50%; z-index:10; transition:0.3s; }
-.carousel-btn:hover { background:var(--green-dark); transform:translateY(-50%) scale(1.1); }
-.left-btn { left:-25px; }
-.right-btn { right:-25px; }
+.card-title {
+    font-weight: 600;
+    color: var(--green-dark);
+}
 
-/* Categorias */
-.categories-section { max-width:1200px; margin:60px auto; padding:0 20px; text-align:center; }
-.categories-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-bottom:30px; }
-.category-tag { display:inline-block; padding:12px 25px; background:#fff; color:var(--green-dark); font-weight:600; border-radius:25px; font-size:1rem; text-decoration:none; border:2px solid var(--green-mid); box-shadow:0 4px 12px rgba(0,0,0,0.08); transition:all 0.3s ease; }
-.category-tag:hover { background:var(--green-mid); color:#fff; transform:translateY(-3px) scale(1.05); box-shadow:0 8px 20px rgba(0,0,0,0.15); }
+.card-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+}
 
-/* Alfabeto */
-.alphabet-title { font-size:1.2rem; color:var(--green-dark); margin-bottom:15px; }
-.alphabet-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-bottom:40px; }
-.alphabet-tag { display:inline-block; padding:8px 12px; background:#fff; color:var(--green-dark); font-weight:600; border-radius:20px; font-size:0.95rem; text-decoration:none; border:2px solid var(--green-mid); box-shadow:0 3px 8px rgba(0,0,0,0.08); transition:all 0.3s ease; }
-.alphabet-tag:hover { background:var(--green-mid); color:#fff; transform:translateY(-3px) scale(1.05); box-shadow:0 6px 15px rgba(0,0,0,0.12); }
+.price {
+    font-weight: 700;
+    color: var(--green-mid);
+    font-size: 1.1rem;
+}
 
-/* Rodapé */
-.footer { background:var(--green-dark); color:#fff; text-align:center; padding:30px 20px; margin-top:50px; }
-.footer-text { margin-bottom:10px; }
-.footer-disclaimer { font-size:0.85rem; margin-bottom:15px; }
-.social-icons { display:flex; justify-content:center; gap:15px; }
-.social-link { font-size:1.5rem; color:#fff; transition:0.3s; }
-.social-link:hover { color:var(--green-light); }
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--green-mid);
+    color: #fff;
+    border: none;
+    font-size: 1.5rem;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+.carousel-btn:hover {
+    background: var(--green-dark);
+    transform: translateY(-50%) scale(1.1);
+}
+.left-btn { left: -25px; }
+.right-btn { right: -25px; }
 
-/* Contêiner das plantas caindo */
+/* -------------------------------------- */
+/*              CATEGORIAS                */
+/* -------------------------------------- */
+.categories-section {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.categories-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.category-tag {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #fff;
+    color: var(--green-dark);
+    font-weight: 600;
+    border-radius: 25px;
+    border: 2px solid var(--green-mid);
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+}
+.category-tag:hover {
+    background: var(--green-mid);
+    color: #fff;
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* -------------------------------------- */
+/*               ALFABETO                 */
+/* -------------------------------------- */
+.alphabet-title {
+    font-size: 1.2rem;
+    color: var(--green-dark);
+    margin-bottom: 15px;
+}
+
+.alphabet-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+
+.alphabet-tag {
+    padding: 8px 12px;
+    background: #fff;
+    color: var(--green-dark);
+    font-weight: 600;
+    border-radius: 20px;
+    text-decoration: none;
+    border: 2px solid var(--green-mid);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+}
+.alphabet-tag:hover {
+    background: var(--green-mid);
+    color: #fff;
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* -------------------------------------- */
+/*              FOOTER                    */
+/* -------------------------------------- */
+.footer {
+    background: var(--green-dark);
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 50px;
+}
+
+.footer-disclaimer {
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-link {
+    font-size: 1.5rem;
+    color: #fff;
+    transition: 0.3s;
+}
+.social-link:hover { 
+    color: var(--green-light); 
+}
+
+/* -------------------------------------- */
+/*         FLORES/PLANTAS CAINDO          */
+/* -------------------------------------- */
 .plant-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100% - 150px); /* limitar para não cobrir rodapé */
+    height: calc(100% - 150px);
     pointer-events: none;
     overflow: hidden;
-    z-index: 0; /* atrás do conteúdo */
+    z-index: 0;
 }
 
-/* Plantas/Flores */
 .falling-plant {
     position: absolute;
     width: 30px;
@@ -220,25 +379,65 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     opacity: 0.8;
-    animation-name: fall, sway;
-    animation-duration: 8s, 4s;
-    animation-timing-function: linear, ease-in-out;
-    animation-iteration-count: infinite;
+    animation: fall 8s linear infinite, sway 4s ease-in-out infinite;
 }
 
-/* Queda vertical */
 @keyframes fall {
     0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
     100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
 }
 
-/* Balanço lateral */
 @keyframes sway {
     0%, 100% { transform: translateX(0); }
     50% { transform: translateX(20px); }
 }
 
+/* -------------------------------------- */
+/*             BOTÕES CRUD                */
+/* -------------------------------------- */
+.header-btn,
+form .header-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+    background: #2a7ae4;
+    color: white;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: 0.2s ease-in-out;
+}
 
-/* Responsividade */
-@media(max-width:768px){ .card { min-width:180px; } .category-tag, .alphabet-tag { padding:10px 18px; font-size:0.9rem; } }
-@media(max-width:480px){ .card { min-width:150px; } .category-tag, .alphabet-tag { padding:8px 15px; font-size:0.85rem; } }
+.header-btn:hover { background: #1f5eb1; }
+
+.btn-edit { background: #4CAF50 !important; }
+.btn-edit:hover { background: #3b8d3f !important; }
+
+.btn-remove { background: #D9534F !important; }
+.btn-remove:hover { background: #b94643 !important; }
+
+.btn-create { background: #007bff; }
+.btn-create:hover { background: #0056b3; }
+
+/* -------------------------------------- */
+/*            RESPONSIVIDADE              */
+/* -------------------------------------- */
+@media(max-width:768px) {
+    .card { min-width: 180px; }
+    .category-tag, .alphabet-tag {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+    }
+}
+
+@media(max-width:480px) {
+    .card { min-width: 150px; }
+    .category-tag, .alphabet-tag {
+        padding: 8px 15px;
+        font-size: 0.85rem;
+    }
+}
