@@ -7,6 +7,7 @@
 
     <!-- Importa seu CSS principal -->
     <link rel="stylesheet" href="{{ asset('css/encyclopedia.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/imagem.css') }}">
 </head>
 
 <body>
@@ -49,30 +50,18 @@
             <p><strong>Preço:</strong> R$ {{ number_format($product->price, 2, ',', '.') }}</p>
             <p><strong>Descrição:</strong> {{ $product->description }}</p>
 
-            @if($product->image)
-                <p><strong>Imagem:</strong></p>
-                <img src="{{ asset('storage/' . $product->image) }}" 
-                     style="width: 100%; max-width: 450px; border-radius: 12px; margin-top: 10px;">
-            @endif
+                   @if($product->image)
+                    <p><strong>Imagem:</strong></p>
+
+                    <div class="product-image-box">
+                        <img src="{{ asset('storage/' . $product->image) }}" 
+                            alt="Imagem do produto" 
+                            class="product-image">
+                    </div>
+                @endif
+
 
             <br><br>
-
-            <div style="display: flex; gap: 10px;">
-                <a href="{{ route('product.edit', $product->id) }}" 
-                   class="header-btn" 
-                   style="padding: 10px 20px;">
-                    Editar
-                </a>
-
-                <form action="{{ route('product.destroy', $product->id) }}" method="POST"
-                      onsubmit="return confirm('Tem certeza que deseja deletar este produto?');">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="header-btn" style="padding: 10px 20px;">
-                        Remover
-                    </button>
-                </form>
-            </div>
 
         </div>
 

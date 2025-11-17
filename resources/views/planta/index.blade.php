@@ -75,10 +75,18 @@
                     @foreach ($plantas as $planta)
                         <div class="card">
 
-                            {{-- TEMPORÁRIO — até colocar upload --}}
-                            <img src="{{ asset('img/default-planta.jpg') }}"
-                                alt="Imagem Planta"
-                                class="card-image">
+                            {{-- IMAGEM REAL OU PADRÃO --}}
+                            @if ($planta->imagem)
+                                <img 
+                                    src="{{ asset('storage/' . $planta->imagem) }}"
+                                    alt="Imagem da Planta"
+                                    class="card-image">
+                            @else
+                                <img 
+                                    src="{{ asset('img/default-planta.jpg') }}"
+                                    alt="Imagem Padrão"
+                                    class="card-image">
+                            @endif
 
                             <h3 class="card-title">{{ $planta->nome }}</h3>
                             <p class="card-description">{{ $planta->descricao }}</p>

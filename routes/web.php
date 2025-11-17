@@ -23,3 +23,4 @@ Route::resource('/treatment', TreatmentsController::class);
 // CRUD ARTIGOS
 Route::resource('/article', ArticlesController::class);
 
+

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nome');
             $table->string('tipo');
             $table->string('descricao');
+            $table->string('imagem')->nullable();  // <-- CAMPO DE IMAGEM
             $table->timestamps();
         });
     }

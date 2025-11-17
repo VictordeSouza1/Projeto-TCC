@@ -2,46 +2,40 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Models\Planta;
 
 class PlantaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $plantas = Planta::all();
         return view('planta.index', compact('plantas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('planta.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $planta = new Planta();
         $planta->nome = $request->nome;
         $planta->tipo = $request->tipo;
         $planta->descricao = $request->descricao;
+
+        // --- SALVAR IMAGEM ---
+        if ($request->hasFile('imagem')) {
+            $path = $request->file('imagem')->store('plantas', 'public');
+            $planta->imagem = $path; // salva o caminho no banco
+        }
+
         $planta->save();
 
         return redirect()->route('planta.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $planta = Planta::find($id);
@@ -53,9 +47,6 @@ class PlantaController extends Controller
         return redirect()->route('planta.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $planta = Planta::find($id);
@@ -67,9 +58,6 @@ class PlantaController extends Controller
         return redirect()->route('planta.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $planta = Planta::find($id);
@@ -78,15 +66,19 @@ class PlantaController extends Controller
             $planta->nome = $request->nome;
             $planta->tipo = $request->tipo;
             $planta->descricao = $request->descricao;
-            $planta->save();   
+
+            // --- ATUALIZAR IMAGEM SE O USUÁRIO ENVIAR OUTRA ---
+            if ($request->hasFile('imagem')) {
+                $path = $request->file('imagem')->store('plantas', 'public');
+                $planta->imagem = $path;
+            }
+
+            $planta->save();
         }
 
         return redirect()->route('planta.index');   
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $planta = Planta::find($id);

@@ -6,6 +6,7 @@
     <title>Loja - Natureza em Casa</title>
     <link rel="icon" href="{{ asset('img/Natureza-removebg-preview.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ asset('css/loja.css') }}">
+    {{-- Fontes --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
@@ -50,12 +51,13 @@
         <h1 class="banner-title">LOJA</h1>
     </section>
 
-    <!-- Produtos estáticos -->
+    <!-- Produtos -->
     <section class="products-section">
 
         <div class="title-row" style="display: flex; justify-content: space-between; align-items: center;">
             <h2 class="section-title">Destaque</h2>
-              <a href="{{ route('product.create') }}" class="btn-add">
+
+            <a href="{{ route('product.create') }}" class="btn-add">
                 + Cadastrar Produto
             </a>
         </div>
@@ -66,47 +68,53 @@
             <div class="carousel-container">
                 <div class="card-carousel">
 
-                    @php
-                        $product = (object)[
-                            'id' => 1,
-                            'name' => 'Bananeira',
-                            'description' => 'Uma planta muito resistente, ideal para quintais e jardins.',
-                            'price' => 49.90,
-                            'image' => 'products/banana.jpg'
-                        ];
-                    @endphp
-
+                    @foreach($products as $product)
                     <div class="card">
-                        {{-- imagem --}}
+
+                        {{-- Imagem --}}
                         <img src="{{ asset('storage/' . $product->image) }}" 
                              alt="{{ $product->name }}" 
                              class="card-image">
 
-                        {{-- nome --}}
+                        {{-- Nome --}}
                         <h3 class="card-title">{{ $product->name }}</h3>
 
-                        {{-- descrição --}}
-                        <p class="card-description">{{ Str::limit($product->description, 60) }}</p>
+                        {{-- Descrição curta --}}
+                        <p class="card-description">{{ \Illuminate\Support\Str::limit($product->description, 60) }}</p>
 
-                        {{-- preço --}}
-                        <div class="price">R$ {{ number_format($product->price, 2, ',', '.') }}</div>
+                        {{-- Preço --}}
+                        <div class="price">
+                            R$ {{ number_format($product->price, 2, ',', '.') }}
+                        </div>
 
                         <div class="rating">★ ★ ★ ★ ☆</div>
+
                         <div class="card-buttons" style="display: flex; gap: 8px; margin-top: 10px;">
-                            
+
+                        <a href="{{ route('product.show', $product->id) }}"
+                        style="flex: 1; text-align: center; padding: 8px 0; background: #1ba55c; color: white; border-radius: 5px; text-decoration: none;">
+                            Adicionar ao carrinho
+                        </a>
+
+                            {{-- Ver mais --}}
                             <a href="{{ route('product.show', $product->id) }}"
-                            style="flex: 1; text-align: center; padding: 8px 0; background: #1ba55c; color: white; border-radius: 5px; text-decoration: none;">
+                               style="flex: 1; text-align: center; padding: 8px 0; background: #1ba55c; color: white; border-radius: 5px; text-decoration: none;">
                                 Ver Mais
                             </a>
 
+                            {{-- Editar --}}
                             <a href="{{ route('product.edit', $product->id) }}"
-                            style="flex: 1; text-align: center; padding: 8px 0; background: #ffc107; color: black; border-radius: 5px; text-decoration: none;">
+                               style="flex: 1; text-align: center; padding: 8px 0; background: #ffc107; color: black; border-radius: 5px; text-decoration: none;">
                                 Editar
                             </a>
 
-                            <form action="{{ route('product.destroy', $product->id) }}" method="POST" style="flex: 1; margin: 0;">
+                            {{-- Remover --}}
+                            <form action="{{ route('product.destroy', $product->id) }}" 
+                                  method="POST" 
+                                  style="flex: 1; margin: 0;">
                                 @csrf
                                 @method('DELETE')
+
                                 <button type="submit"
                                         style="width: 100%; padding: 8px 0; background: #dc3545; color: white; border-radius: 5px; border: none; cursor: pointer;">
                                     Remover
@@ -115,8 +123,8 @@
 
                         </div>
 
-
                     </div>
+                    @endforeach
 
                 </div>
             </div>

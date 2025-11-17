@@ -7,20 +7,21 @@
 
     <!-- Importa seu CSS principal -->
     <link rel="stylesheet" href="{{ asset('css/encyclopedia.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/imagem.css') }}">
 </head>
 
 <body>
 
-    <!-- HEADER (igual ao restante do site) -->
+    <!-- HEADER -->
     <header class="header">
         <div class="header-left">
             <div class="logo-wrapper">
-                 <a href="/"> 
-                <img src="{{ asset('img/Natureza-removebg-preview.png') }}" 
-                     alt="Logo Natureza em Casa" 
-                     class="logo"
-                     style="cursor: pointer;">
-                 </a>
+                <a href="/">
+                    <img src="{{ asset('img/Natureza-removebg-preview.png') }}" 
+                         alt="Logo Natureza em Casa" 
+                         class="logo"
+                         style="cursor: pointer;">
+                </a>
             </div>
             <div class="brand-title">Natureza em Casa</div>
         </div>
@@ -28,14 +29,14 @@
         <div class="header-center"></div>
 
         <div class="header-buttons">
-           <a href="{{ route('planta.index') }}" style="font-size: 40px; color: white; text-decoration: none; padding: 5px 15px;">
-    ←
-              </a>
-
+            <a href="{{ route('planta.index') }}" 
+               style="font-size: 40px; color: white; text-decoration: none; padding: 5px 15px;">
+                ←
+            </a>
         </div>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL EM CARD BONITO -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <section style="display: flex; justify-content: center; margin-top: 40px;">
 
         <div class="card no-hover" style="width: 600px; padding: 25px; text-align: left;">
@@ -49,10 +50,15 @@
             <p><strong>Tipo:</strong> {{ $planta->tipo }}</p>
             <p><strong>Descrição:</strong> {{ $planta->descricao }}</p>
 
+            {{-- IMAGEM --}}
             @if($planta->imagem)
                 <p><strong>Imagem:</strong></p>
-                <img src="{{ asset('storage/' . $planta->imagem) }}" 
-                     style="width: 100%; max-width: 450px; border-radius: 12px; margin-top: 10px;">
+
+                <div class="product-image-box">
+                    <img src="{{ asset('storage/' . $planta->imagem) }}" 
+                         alt="Imagem da planta" 
+                         class="product-image">
+                </div>
             @endif
 
             <br><br>

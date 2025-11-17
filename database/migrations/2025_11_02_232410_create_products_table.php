@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
-           $table->id('product_id'); // Equivalente a: product_id int [pk]
-            $table->text('description')->nullable(); // Equivalente a: description text
-            $table->text('images')->nullable(); // Equivalente a: images text
-            $table->decimal('price', 8, 2); // Equivalente a: price decimal (8 dígitos no total, 2 após a vírgula)
-            $table->timestamps();
+            $table->id();                          // ID padrão (coluna: id)
+            $table->string('name');                // Nome do produto
+            $table->text('description')->nullable(); // Descrição
+            $table->string('image')->nullable();   // Caminho da imagem
+            $table->decimal('price', 10, 2);       // Preço
+            $table->timestamps();                  // created_at / updated_at
         });
     }
 

@@ -37,7 +37,7 @@
             <nav class="nav-links">
                 <a href="#" class="nav-link">Artigos</a>
                 <a href="{{ url('/planta') }}" class="nav-link">Enciclopédia</a>
-                <a href="#" class="nav-link">Loja</a>
+                <a href="{{ url('/product') }}" class="nav-link">Loja</a>
             </nav>
         </div>
 
@@ -49,71 +49,72 @@
     {{-- MAIN COM O MESMO FUNDO E ESTILO DA HOME --}}
     <main>
         <div class="main-bg"></div>
+
         <div class="container" style="display: flex; justify-content: center; margin-top: 40px;">
 
-            {{-- CARD CENTRAL COM FORM --}}
+            {{-- CARD CENTRAL --}}
             <div class="card" style="width: 600px;">
 
                 <h1 class="section-title" style="margin-bottom: 20px;">Nova Planta</h1>
 
-                <form action="{{ route('planta.store') }}" method="POST" style="display: flex; flex-direction: column; gap: 20px;">
+                <form action="{{ route('planta.store') }}" method="POST" enctype="multipart/form-data"
+                      style="display: flex; flex-direction: column; gap: 20px;">
                     @csrf
 
-                   {{-- NOME --}}
-                <div>
-                    <label style="font-weight: 600; color: var(--green-dark);">Nome:</label>
-                    <input type="text" name="nome"
-                        class="search-input"
-                        style="border-radius: 12px; width: 100%; padding: 14px;">
-                </div>
-
-                {{-- TIPO --}}
-                <div>
+                    {{-- NOME --}}
+                    <div>
+                        <label style="font-weight: 600; color: var(--green-dark);">Nome:</label>
+                        <input type="text" name="nome"
+                               class="search-input"
+                               style="border-radius: 12px; width: 100%; padding: 14px;">
+                    </div>
+                    {{-- TIPO --}}
+                    <div>
                     <label style="font-weight: 600; color: var(--green-dark);">Tipo:</label>
                     <input type="text" name="tipo"
                         class="search-input"
                         style="border-radius: 12px; width: 100%; padding: 14px;">
                 </div>
+                 {{-- IMAGEM --}}
+                    <div>
+                        <label style="font-weight: 600; color: var(--green-dark);">Imagem:</label>
+                        <input type="file" name="imagem"
+                               style="padding: 10px;">
+                    </div>
 
-                {{-- DESCRIÇÃO – CAIXA MAIOR --}}
-                <div>
-                    <label style="font-weight: 600; color: var(--green-dark);">Descrição:</label>
-                    <textarea name="descricao"
-                        class="search-input"
-                        rows="6"
+                    {{-- DESCRIÇÃO --}}
+                    <div>
+                        <label style="font-weight: 600; color: var(--green-dark);">Descrição:</label>
+                        <textarea name="descricao"
+                                  class="search-input"
+                                  rows="6"
+                                  style="
+                                      border-radius: 12px;
+                                      width: 100%;
+                                      padding: 14px;
+                                      resize: vertical;
+                                      font-family: 'Inter', sans-serif;
+                                  "></textarea>
+                    </div>
+
+                    {{-- BOTÃO SALVAR --}}
+                    <button type="submit"
                         style="
-                            border-radius: 12px;
-                            width: 100%;
                             padding: 14px;
-                            resize: vertical;
-                            font-family: 'Inter', sans-serif;
-                        "></textarea>
-                </div>
+                            border: none;
+                            border-radius: 10px;
+                            background: var(--green-mid);
+                            color: #fff;
+                            font-weight: 600;
+                            cursor: pointer;
+                            transition: 0.3s;
+                        ">
+                        Salvar Planta
+                    </button>
 
-                {{-- BOTÃO SALVAR --}}
-                <button type="submit"
-                    style="
-                        padding: 14px;
-                        border: none;
-                        border-radius: 10px;
-                        background: var(--green-mid);
-                        color: #fff;
-                        font-weight: 600;
-                        cursor: pointer;
-                        transition: 0.3s;
-                    ">
-                    Salvar
-                </button>
-
-                    <div style="text-align: center; margin-bottom: 10px;">
                     <a href="{{ route('planta.index') }}"
-                    style="font-size: 40px; color: black; text-decoration: none; padding: 5px 15px;">
-                        ←
-                    </a>
-                </div>
-
-
-        </div>
+                       style="text-align: center; margin-top: 10px; color: var(--green-dark); font-weight: 600;">
+                        Voltar
                     </a>
 
                 </form>
@@ -123,7 +124,7 @@
         </div>
     </main>
 
-    {{-- FOOTER IGUAL AO DA HOME --}}
+    {{-- FOOTER --}}
     <footer class="footer">
         <p class="footer-text">© 2025 Natureza em Casa. Todos os direitos reservados.</p>
         <p class="footer-disclaimer">As informações aqui são educativas e não substituem orientação profissional de saúde.</p>
