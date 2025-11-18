@@ -42,7 +42,9 @@
         <div class="header-buttons">
             <button class="header-btn">Crie a sua Conta</button>
             <button class="header-btn">Entrar</button>
-            <button class="header-btn cart-btn">🛒 0</button>
+            <a href="{{ route('cart.index') }}" class="header-btn cart-btn">
+            🛒
+        </a>
         </div>
     </header>
 
@@ -91,10 +93,14 @@
 
                         <div class="card-buttons" style="display: flex; gap: 8px; margin-top: 10px;">
 
-                        <a href="{{ route('product.show', $product->id) }}"
-                        style="flex: 1; text-align: center; padding: 8px 0; background: #1ba55c; color: white; border-radius: 5px; text-decoration: none;">
+                        <form action="{{ route('cart.add', $product->id) }}" method="POST" style="flex: 1; margin: 0;">
+                        @csrf
+                        <button type="submit"
+                            style="width: 100%; padding: 8px 0; background: #1ba55c; color: white;
+                            border-radius: 5px; border: none; cursor: pointer;">
                             Adicionar ao carrinho
-                        </a>
+                        </button>
+                    </form>
 
                             {{-- Ver mais --}}
                             <a href="{{ route('product.show', $product->id) }}"

@@ -12,19 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id'); // Equivalente a: user_id int [pk]
-            $table->string('name'); // Equivalente a: name varchar
-            $table->string('email')->unique(); // Equivalente a: email varchar
+            $table->id('user_id'); // PK personalizada
+            $table->string('name');
+            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password'); // Equivalente a: password varchar
-            
-            // Novos campos:
-            $table->string('cnpj')->nullable(); // Equivalente a: cnpj varchar [null]
-            
-            // Chave estrangeira (FK) para a tabela 'roles'
-            $table->foreignId('role_id') // Equivalente a: role_id int [not null]
-                  ->constrained('roles') // Foreign key para a tabela 'roles'
-                  ->onDelete('restrict'); // Evita deletar um Role se houver Users ligados
+            $table->string('password');
+
+            // Campo opcional
+            $table->string('cnpj')->nullable();
+
+            // CORRIGIDO: role_id agora é OPICIONAL
+            $table->foreignId('role_id')
+                  ->nullable()                     // permite vazio
+                  ->constrained('roles')           // FK
+                  ->nullOnDelete();                // se o role for apagado, vira NULL
 
             $table->rememberToken();
             $table->timestamps();

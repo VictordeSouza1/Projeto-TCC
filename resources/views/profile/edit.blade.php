@@ -1,0 +1,113 @@
+    {{-- Importa CSS e JS via Vite --}}
+    @vite(['resources/css/app.css', 'resources/css/profile.css', 'resources/js/app.js'])
+
+    {{-- Header --}}
+    <header class="header" style="margin-bottom: 1.5rem;">
+        <div class="logo-wrapper">
+            <a href="{{ route('product.index') }}">
+                <img src="{{ asset('img/Natureza-removebg-preview.png') }}" alt="Logo" class="logo">
+            </a>
+            <h1 style="color:var(--white); font-family:'Merriweather', serif; font-size:1.1rem;">Natureza em Casa</h1>
+        </div>
+
+        <div class="header-buttons">
+            <a href="{{ url()->previous() }}" class="header-btn">Voltar</a>
+
+            <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+                @csrf
+                <button type="submit" class="header-btn logout-btn">Sair</button>
+            </form>
+        </div>
+    </header>
+
+    {{-- Conteúdo principal --}}
+    <main class="profile-container">
+        {{-- Sidebar --}}
+        <aside class="sidebar">
+            <div class="profile-photo">
+                @php
+                    $photo = optional(Auth::user())->profile_photo_url ?? asset('img/perfil.jpg');
+                @endphp
+                <img src="{{ $photo }}" alt="{{ Auth::user()->name ?? 'Usuário' }}">
+            </div>
+
+            <h2 style="margin-top:1rem;">{{ Auth::user()->name ?? 'Sem Nome' }}</h2>
+            <p class="bio">“Cuidar do corpo é respeitar a natureza em nós.” 🍃</p>
+
+            <div style="margin-top:1rem;">
+                <a href="#" class="form-btn" style="display:block; margin-bottom:0.6rem;">Meu Perfil</a>
+                <a href="{{ route('product.index') }}" class="form-btn" style="display:block;">Ir para Loja</a>
+            </div>
+        </aside>
+
+        {{-- Main Content --}}
+        <section class="main-content">
+            {{-- Quick actions --}}
+            <div class="quick-actions">
+                <a href="#" class="action-card">
+                    <div class="icon">📚</div>
+                    <div class="details">
+                        <h3>Artigos Salvos</h3>
+                        <p>26 leituras</p>
+                    </div>
+                </a>
+
+                <a href="#" class="action-card">
+                    <div class="icon">🌿</div>
+                    <div class="details">
+                        <h3>Plantas Favoritas</h3>
+                        <p>7 espécies</p>
+                    </div>
+                </a>
+
+                <a href="{{ route('cart.index') }}" class="action-card">
+                    <div class="icon">🛒</div>
+                    <div class="details">
+                        <h3>Carrinho</h3>
+                        <p>{{ array_sum(array_column(session('cart', []), 'quantidade')) }} itens</p>
+                    </div>
+                </a>
+            </div>
+
+            {{-- Informações clínicas --}}
+            <div class="info-section">
+                <h3>Informações Clínicas</h3>
+                <div class="info-grid">
+                    <div class="info-item"><strong>Idade:</strong> 31 anos</div>
+                    <div class="info-item"><strong>Gênero:</strong> Feminino</div>
+                    <div class="info-item"><strong>Localização:</strong> Curitiba, PR</div>
+                    <div class="info-item"><strong>Alergias:</strong> Pólen e frutas cítricas</div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>Preferências Naturais</h3>
+                <ul class="preferences">
+                    <li>🌼 Chás calmantes: camomila, melissa e maracujá</li>
+                    <li>💧 Óleos essenciais para relaxamento</li>
+                    <li>🧘‍♀️ Prática de meditação e ioga</li>
+                    <li>🌱 Fitoterapia antes de remédios sintéticos</li>
+                </ul>
+            </div>
+
+            {{-- Formulários Breeze encapsulados nos cards --}}
+            <div class="info-section">
+                <h3 style="margin-bottom:1rem; font-family:'Merriweather', serif; color:var(--green-dark);">Informações do Perfil</h3>
+                @if (session('status'))
+                    <div style="margin-bottom:1rem; padding:0.75rem; background:#e6ffed; border-radius:8px; color: #06532a;">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                @include('profile.partials.update-profile-information-form')
+            </div>
+
+            <div class="info-section">
+                <h3 style="margin-bottom:1rem; font-family:'Merriweather', serif; color:var(--green-dark);">Segurança</h3>
+                @include('profile.partials.update-password-form')
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 Natureza em Casa — Cuidando da sua saúde de forma natural.</p>
+    </footer>

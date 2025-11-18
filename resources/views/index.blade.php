@@ -34,7 +34,8 @@
     </div>
 
     <div class="header-buttons">
-        <button class="header-btn">Login</button>
+       <a href="{{ route('register') }}" class="header-btn">Registar</a>
+       <a href="{{ route('login') }}" class="header-btn">Entrar</a>
     </div>
 </header>
 
