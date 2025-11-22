@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/article.css') }}">
+     <link rel="stylesheet" href="{{ asset('css/imagem.css') }}">
 </head>
 
 <body>
@@ -67,16 +68,20 @@
                     @foreach ($articles as $article)
                         <div class="card">
 
-                            <img 
-                                src="{{ asset('img/default-article.jpg') }}"
-                                alt="Imagem do Artigo"
-                                class="card-image">
+                            {{-- IMAGEM DO ARTIGO --}}
+                            @if ($article->image)
+                                <img 
+                                    src="{{ asset('storage/' . $article->image) }}"
+                                    alt="Imagem do Artigo"
+                                    class="card-image">
+                            @else
+                                <img 
+                                    src="{{ asset('img/default-article.jpg') }}"
+                                    alt="Imagem Padrão"
+                                    class="card-image">
+                            @endif
 
                             <h3 class="card-title">{{ $article->title }}</h3>
-
-                            <p class="card-description">
-                                {{ Str::limit($article->description, 120) }}
-                            </p>
 
                             <p class="card-description">
                                 <strong>Autor:</strong> {{ $article->author }}<br>

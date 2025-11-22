@@ -6,6 +6,11 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
+// IMPORTAÇÕES CORRETAS PARA INTERVENTION 3
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ArticlesController extends Controller
 {
@@ -22,14 +27,13 @@ class ArticlesController extends Controller
 
     public function store(Request $request)
     {
-        // ✔ Validação
         $request->validate([
             'title' => 'required|string|max:255',
-            'author' => 'required|string|max:255',
+            'author' => 'nullable|string|max:255',
             'publication_date' => 'required|date',
             'description' => 'nullable|string',
             'scientific_references' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
         ]);
 
         $article = new Article();
@@ -40,60 +44,59 @@ class ArticlesController extends Controller
         $article->description = $request->description;
         $article->scientific_references = $request->scientific_references;
 
-        // ✔ Upload da imagem
+        // PROCESSAMENTO DA IMAGEM (INTERVENTION v3)
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('articles', 'public');
+
+            $manager = new ImageManager(new Driver());
+            $file = $request->file('image');
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+
+            $image = $manager->read($file)->resize(1200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+
+            $path = 'articles/' . $filename;
+
+            $image->save(storage_path('app/public/' . $path));
+
             $article->image = $path;
         }
 
         $article->save();
 
-        return redirect()->route('article.index')
-            ->with('success', 'Artigo publicado com sucesso!');
+        return redirect()->route('article.index')->with('success', 'Artigo publicado com sucesso!');
     }
 
-    public function show(string $id)
+    public function show($id)
     {
         $article = Article::find($id);
+        if ($article) return view('article.show', compact('article'));
 
-        if ($article) {
-            return view('article.show', compact('article'));
-        }
-
-        return redirect()->route('article.index')
-            ->with('error', 'Artigo não encontrado.');
+        return redirect()->route('article.index')->with('error', 'Artigo não encontrado.');
     }
 
-    public function edit(string $id)
+    public function edit($id)
     {
         $article = Article::find($id);
+        if ($article) return view('article.edit', compact('article'));
 
-        if ($article) {
-            return view('article.edit', compact('article'));
-        }
-
-        return redirect()->route('article.index')
-            ->with('error', 'Artigo não encontrado.');
+        return redirect()->route('article.index')->with('error', 'Artigo não encontrado.');
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        // ✔ Validação
         $request->validate([
             'title' => 'required|string|max:255',
-            'author' => 'required|string|max:255',
+            'author' => 'nullable|string|max:255',
             'publication_date' => 'required|date',
             'description' => 'nullable|string',
             'scientific_references' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
         ]);
 
         $article = Article::find($id);
-
-        if (!$article) {
-            return redirect()->route('article.index')
-                ->with('error', 'Erro ao atualizar: Artigo não encontrado.');
-        }
+        if (!$article) return redirect()->route('article.index')->with('error', 'Artigo não encontrado.');
 
         $article->title = $request->title;
         $article->author = $request->author;
@@ -101,42 +104,44 @@ class ArticlesController extends Controller
         $article->description = $request->description;
         $article->scientific_references = $request->scientific_references;
 
-        // ✔ Atualizar imagem (substituir se houver nova)
         if ($request->hasFile('image')) {
 
-            // Remover imagem antiga
             if ($article->image && Storage::disk('public')->exists($article->image)) {
                 Storage::disk('public')->delete($article->image);
             }
 
-            // Armazenar nova
-            $path = $request->file('image')->store('articles', 'public');
+            $manager = new ImageManager(new Driver());
+            $file = $request->file('image');
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+
+            $image = $manager->read($file)->resize(1200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+
+            $path = 'articles/' . $filename;
+
+            $image->save(storage_path('app/public/' . $path));
+
             $article->image = $path;
         }
 
         $article->save();
 
-        return redirect()->route('article.index')
-            ->with('success', 'Artigo atualizado com sucesso!');
+        return redirect()->route('article.index')->with('success', 'Artigo atualizado com sucesso!');
     }
 
-    public function destroy(string $id)
+    public function destroy($id)
     {
         $article = Article::find($id);
+        if (!$article) return redirect()->route('article.index')->with('error', 'Artigo não encontrado.');
 
-        if (!$article) {
-            return redirect()->route('article.index')
-                ->with('error', 'Erro ao deletar: Artigo não encontrado.');
-        }
-
-        // ✔ Excluir imagem do storage
         if ($article->image && Storage::disk('public')->exists($article->image)) {
             Storage::disk('public')->delete($article->image);
         }
 
         $article->delete();
 
-        return redirect()->route('article.index')
-            ->with('success', 'Artigo deletado com sucesso!');
+        return redirect()->route('article.index')->with('success', 'Artigo deletado com sucesso!');
     }
 }
