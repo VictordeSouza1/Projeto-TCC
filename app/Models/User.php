@@ -11,7 +11,14 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    // INFORMAR AO LARAVEL QUE SUA PK É user_id
     protected $primaryKey = 'user_id';
+
+    // DIZER QUE A PK É INCREMENTAL (auto_increment)
+    public $incrementing = true;
+
+    // DIZER QUE O TIPO DA CHAVE É INTEIRO
+    protected $keyType = 'int';
 
     protected $fillable = [
         'name',

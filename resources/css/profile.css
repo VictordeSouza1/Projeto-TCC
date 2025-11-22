@@ -231,6 +231,146 @@ body {
   font-size: 0.9rem;
   margin-top: auto;
 }
+.profile-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* ================================
+   Login Page Styling
+================================ */
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1rem;
+}
+
+.login-logo {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.login-logo img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--green-dark);
+    background: #fff;
+    padding: 4px;
+}
+
+.login-logo h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 1.3rem;
+    margin-top: 0.6rem;
+    color: var(--green-dark);
+}
+
+.login-card {
+    background: #fff;
+    width: 100%;
+    max-width: 420px;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.login-title {
+    font-family: 'Merriweather', serif;
+    color: var(--green-dark);
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Inputs */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.input-field {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-top: 0.5rem;
+    border: 2px solid var(--green-light);
+    border-radius: 12px;
+    outline: none;
+    transition: 0.3s;
+    background: #f8fff8;
+}
+
+.input-field:focus {
+    border-color: var(--green-mid);
+}
+
+/* Remember me */
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0.8rem 0 1.2rem;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+/* Buttons */
+.login-btn {
+    background: var(--green-dark);
+    color: #fff;
+    padding: 0.8rem 1.4rem;
+    border-radius: 25px;
+    border: none;
+    width: 100%;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background: var(--green-mid);
+}
+
+.forgot-btn {
+    color: var(--green-dark);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.forgot-btn:hover {
+    color: var(--green-mid);
+}
+
+/* Register text */
+.register-text {
+    margin-top: 1.2rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.register-text a {
+    color: var(--green-dark);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.register-text a:hover {
+    color: var(--green-mid);
+}
+
+
+
 
 /* Responsivo */
 @media (max-width: 768px) {

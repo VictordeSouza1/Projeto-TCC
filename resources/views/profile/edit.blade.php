@@ -47,16 +47,14 @@
                 <a href="#" class="action-card">
                     <div class="icon">📚</div>
                     <div class="details">
-                        <h3>Artigos Salvos</h3>
-                        <p>26 leituras</p>
+                        <h3>Artigos</h3>
                     </div>
                 </a>
 
                 <a href="#" class="action-card">
                     <div class="icon">🌿</div>
                     <div class="details">
-                        <h3>Plantas Favoritas</h3>
-                        <p>7 espécies</p>
+                        <h3>Plantas</h3>
                     </div>
                 </a>
 
@@ -67,27 +65,6 @@
                         <p>{{ array_sum(array_column(session('cart', []), 'quantidade')) }} itens</p>
                     </div>
                 </a>
-            </div>
-
-            {{-- Informações clínicas --}}
-            <div class="info-section">
-                <h3>Informações Clínicas</h3>
-                <div class="info-grid">
-                    <div class="info-item"><strong>Idade:</strong> 31 anos</div>
-                    <div class="info-item"><strong>Gênero:</strong> Feminino</div>
-                    <div class="info-item"><strong>Localização:</strong> Curitiba, PR</div>
-                    <div class="info-item"><strong>Alergias:</strong> Pólen e frutas cítricas</div>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <h3>Preferências Naturais</h3>
-                <ul class="preferences">
-                    <li>🌼 Chás calmantes: camomila, melissa e maracujá</li>
-                    <li>💧 Óleos essenciais para relaxamento</li>
-                    <li>🧘‍♀️ Prática de meditação e ioga</li>
-                    <li>🌱 Fitoterapia antes de remédios sintéticos</li>
-                </ul>
             </div>
 
             {{-- Formulários Breeze encapsulados nos cards --}}

@@ -26,13 +26,11 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
-// Página inicial
-Route::get('/', function () {
-    return view('index');
-});
-
 // CRUD PLANTAS
 Route::resource('/planta', PlantaController::class);
+
+// CRUD ARTIGOS
+Route::resource('/article', ArticlesController::class);
 
 // CRUD PRODUTOS
 Route::resource('/product', ProductsController::class);
@@ -40,15 +38,10 @@ Route::resource('/product', ProductsController::class);
 // CRUD TRATAMENTOS
 Route::resource('/treatment', TreatmentsController::class);
 
-// CRUD ARTIGOS
-Route::resource('/article', ArticlesController::class);
-// ROTAS DO CARRINHO DE COMPRAS
+// CARRINHO
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
-
-
-
