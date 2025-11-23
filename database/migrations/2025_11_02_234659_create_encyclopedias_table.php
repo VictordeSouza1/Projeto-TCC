@@ -6,32 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('encyclopedias', function (Blueprint $table) {
-           $table->id('encyclopedia_id'); // Equivalente a: encyclopedia_id int [pk]
+            
+            $table->id('encyclopedia_id');
 
-            // CHAVE ESTRANGEIRA para a tabela 'plants'. 
-            // É comum em 1:1 que esta FK seja ÚNICA (unique) para garantir o relacionamento.
-            $table->foreignId('plant_id') // Equivalente a: plant_id int [not null]
-                  ->unique() // Garante que apenas uma entrada de enciclopédia exista por planta
-                  ->constrained(table: 'plants', column: 'plant_id') // Referencia a PK 'plant_id' na tabela 'plants'
-                  ->onDelete('cascade'); // Se a planta for deletada, o registro da enciclopédia é apagado
-            
-            // Colunas de detalhes da enciclopédia
-            $table->text('detailed_description')->nullable(); // Equivalente a: detailed_description text
-            $table->text('illustrative_images')->nullable(); // Equivalente a: illustrative_images text (guardando URLs/JSON)
-            
+            // FK correta para a tabela 'plantas'
+            $table->unsignedBigInteger('plant_id')->unique();
+            $table->foreign('plant_id')
+                  ->references('id')        // PK correta da tabela plantas
+                  ->on('plantas')           // nome correto da tabela
+                  ->onDelete('cascade');
+
+            // Conteúdos da enciclopédia
+            $table->text('detailed_description')->nullable();
+            $table->text('illustrative_images')->nullable();
+
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('encyclopedias');

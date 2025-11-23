@@ -160,7 +160,7 @@
     </footer>
 
     {{-- JS --}}
-    <script src="{{ asset('js/encyclopedia.js') }}"></script>
+    <script src="{{ asset('js/loja.js') }}"></script>
 
 </body>
 </html>

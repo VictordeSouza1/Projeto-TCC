@@ -2,153 +2,119 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Treatment; // Assumindo que o Model é Treatment
-use App\Models\Plant;     // Para buscar a planta relacionada
 use Illuminate\Http\Request;
+use App\Models\Treatment;
+use App\Models\Planta;
 use Illuminate\Support\Facades\Auth;
 
 class TreatmentsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Listar tratamentos
      */
     public function index()
     {
-        /*
-        // Obtém todos os tratamentos
-        $treatments = Treatment::all();
-        
-        // Retorna a view de índice, passando os tratamentos
+        $treatments = Treatment::with('planta')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         return view('treatment.index', compact('treatments'));
-        */
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Formulário de criação
      */
     public function create()
     {
-        /*
-        // Se precisar preencher um dropdown de plantas, você pode buscar:
-        $plants = Plant::all();
-        return view('treatment.create', compact('plants'));
-        */
+        $plantas = Planta::all();
+
+        return view('treatment.create', compact('plantas'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Salvar
      */
     public function store(Request $request)
     {
-        /*
-        // 1. Validação dos dados
         $request->validate([
-            'plant_id' => 'required|exists:plants,plant_id', // Garante que a planta exista
-            'treatment_description' => 'required|string',
-            'scientific_references' => 'nullable|string',
+            'plant_id' => 'required|exists:plantas,id',
+            'nome' => 'required|string|max:255',
+            'descricao' => 'nullable|string',
+            'modo_preparo' => 'nullable|string',
+            'observacoes' => 'nullable|string',
         ]);
 
-        // 2. Criação do novo Tratamento
-        $treatment = new Treatment();
-        $treatment->plant_id = $request->plant_id;
-        $treatment->user_id = Auth::id(); // Associa ao usuário logado (foreign key)
-        $treatment->treatment_description = $request->treatment_description;
-        $treatment->scientific_references = $request->scientific_references;
-        $treatment->save();
+        Treatment::create([
+            'plant_id' => $request->plant_id,
+            'user_id' => Auth::id(), // user_id é nullable mas aqui salva o logado
+            'nome' => $request->nome,
+            'descricao' => $request->descricao,
+            'modo_preparo' => $request->modo_preparo,
+            'observacoes' => $request->observacoes,
+        ]);
 
-        // 3. Redirecionamento
-        return redirect()->route('treatment.index')->with('success', 'Tratamento cadastrado com sucesso!');
-        */
+        return redirect()->route('treatment.index')
+            ->with('success', 'Tratamento criado com sucesso!');
     }
 
     /**
-     * Display the specified resource.
+     * Mostrar um tratamento
      */
     public function show(string $id)
     {
-        /*
-        // Busca o tratamento pelo treatment_id
-        $treatment = Treatment::find($id);
+        $treatment = Treatment::with('planta')->findOrFail($id);
 
-        if (isset($treatment)) {
-            // Retorna a view de visualização, passando o tratamento
-            return view('treatment.show', compact('treatment'));
-        }
-
-        // Redireciona com erro se não encontrar
-        return redirect()->route('treatment.index')->with('error', 'Tratamento não encontrado.');
-        */
+        return view('treatment.show', compact('treatment'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Formulário de edição
      */
     public function edit(string $id)
     {
-        /*
-        // Busca o tratamento pelo treatment_id
-        $treatment = Treatment::find($id);
-        
-        if (isset($treatment)) {
-            // Se precisar preencher um dropdown de plantas, você pode buscar:
-            $plants = Plant::all();
-            return view('treatment.edit', compact('treatment', 'plants'));
-        }
+        $treatment = Treatment::findOrFail($id);
+        $plantas = Planta::all();
 
-        // Redireciona com erro se não encontrar
-        return redirect()->route('treatment.index')->with('error', 'Tratamento não encontrado.');
-        */
+        return view('treatment.edit', compact('treatment', 'plantas'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Atualizar
      */
     public function update(Request $request, string $id)
     {
-        /*
-        // 1. Validação dos dados
         $request->validate([
-            'plant_id' => 'required|exists:plants,plant_id',
-            'treatment_description' => 'required|string',
-            'scientific_references' => 'nullable|string',
+            'plant_id' => 'required|exists:plantas,id',
+            'nome' => 'required|string|max:255',
+            'descricao' => 'nullable|string',
+            'modo_preparo' => 'nullable|string',
+            'observacoes' => 'nullable|string',
         ]);
-        
-        // Busca o tratamento pelo treatment_id
-        $treatment = Treatment::find($id);
 
-        if (isset($treatment)) {
-            // 2. Atualização dos campos
-            $treatment->plant_id = $request->plant_id;
-            // user_id não é alterado, pois representa o criador
-            $treatment->treatment_description = $request->treatment_description;
-            $treatment->scientific_references = $request->scientific_references;
-            
-            $treatment->save();
+        $treatment = Treatment::findOrFail($id);
 
-            // 3. Redirecionamento
-            return redirect()->route('treatment.show', $treatment->treatment_id)->with('success', 'Tratamento atualizado com sucesso!');
-        }
+        $treatment->update([
+            'plant_id' => $request->plant_id,
+            'nome' => $request->nome,
+            'descricao' => $request->descricao,
+            'modo_preparo' => $request->modo_preparo,
+            'observacoes' => $request->observacoes,
+        ]);
 
-        return redirect()->route('treatment.index')->with('error', 'Erro ao atualizar: Tratamento não encontrado.');
-        */
+        return redirect()->route('treatment.index')
+            ->with('success', 'Tratamento atualizado com sucesso!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Deletar
      */
     public function destroy(string $id)
     {
-        /*
-        // Busca o tratamento pelo treatment_id
-        $treatment = Treatment::find($id);
+        $treatment = Treatment::findOrFail($id);
 
-        if (isset($treatment)) {
-            $treatment->delete();
-            return redirect()->route('treatment.index')->with('success', 'Tratamento deletado com sucesso!');
-        }
+        $treatment->delete();
 
-        // Redireciona com erro se não encontrar
-        return redirect()->route('treatment.index')->with('error', 'Erro ao deletar: Tratamento não encontrado.');
-        */
+        return redirect()->route('treatment.index')
+            ->with('success', 'Tratamento deletado com sucesso!');
     }
 }

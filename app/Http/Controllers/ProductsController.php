@@ -41,36 +41,18 @@ class ProductsController extends Controller
         return redirect()->route('product.index')->with('success', 'Produto criado com sucesso!');
     }
 
-    public function show($id)
+    public function show(Product $product)
     {
-        $product = Product::find($id);
-
-        if (!$product) {
-            return redirect()->route('product.index')->with('error', 'Produto não encontrado.');
-        }
-
         return view('product.show', compact('product'));
     }
 
-    public function edit($id)
+    public function edit(Product $product)
     {
-        $product = Product::find($id);
-
-        if (!$product) {
-            return redirect()->route('product.index')->with('error', 'Produto não encontrado.');
-        }
-
         return view('product.edit', compact('product'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        $product = Product::find($id);
-
-        if (!$product) {
-            return redirect()->route('product.index')->with('error', 'Produto não encontrado.');
-        }
-
         $request->validate([
             'nome'      => 'required|string|max:255',
             'descricao' => 'required|string',
@@ -88,18 +70,12 @@ class ProductsController extends Controller
 
         $product->save();
 
-        return redirect()->route('product.show', $product->product_id)
+        return redirect()->route('product.show', $product->id)
                          ->with('success', 'Produto atualizado com sucesso!');
     }
 
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $product = Product::find($id);
-
-        if (!$product) {
-            return redirect()->route('product.index')->with('error', 'Produto não encontrado.');
-        }
-
         $product->delete();
 
         return redirect()->route('product.index')->with('success', 'Produto deletado com sucesso!');

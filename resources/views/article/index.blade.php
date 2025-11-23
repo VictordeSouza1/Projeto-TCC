@@ -132,7 +132,7 @@
         </div>
     </footer>
 
-    <script src="{{ asset('js/article.js') }}"></script>
+    <script src="{{ asset('js/loja.js') }}"></script>
 
 </body>
 </html>
