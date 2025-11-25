@@ -17,6 +17,15 @@
 
     {{-- HEADER --}}
     <header class="header">
+
+        {{-- VOLTAR --}}
+         <div class="header-buttons">
+            <a href="{{ url()->previous() }}" 
+               style="font-size: 40px; color: white; text-decoration: none; padding: 5px 15px;">
+                ←
+            </a>
+        </div>
+
         <div class="header-left">
             <div class="logo-wrapper">
                 <a href="/">
@@ -33,7 +42,7 @@
         </div>
 
         <nav class="nav-links">
-            <a href="{{ url('/article') }}" class="nav-link">Artigos</a>
+            <a href="{{ url('/planta') }}" class="nav-link">Enciclopédia</a>
             <a href="{{ url('/product') }}" class="nav-link">Loja</a>
             <a href="{{ url('/treatment') }}" class="nav-link">Tratamentos</a>
         </nav>

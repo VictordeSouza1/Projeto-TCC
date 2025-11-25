@@ -14,11 +14,27 @@ class TreatmentsController extends Controller
      */
     public function index()
     {
-        $treatments = Treatment::with('planta')
+
+        $research = request('search');
+
+        if($research) {
+
+            $treatments = Treatment::where(function($query) use ($research) {
+                $query->where('nome', 'like', '%'.$research.'%')
+                      ->orWhere('descricao', 'like', '%'.$research.'%');
+            })->get();
+
+            
+
+        } else {
+
+            $treatments = Treatment::with('planta')
             ->orderBy('created_at', 'desc')
             ->get();
+        }
 
-        return view('treatment.index', compact('treatments'));
+        return view('treatment.index', ['treatments' => $treatments,'research' => $research]);
+        
     }
 
     /**

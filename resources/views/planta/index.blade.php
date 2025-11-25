@@ -20,6 +20,16 @@
 
     {{-- HEADER --}}
     <header class="header">
+        
+        {{-- VOLTAR --}}
+         <div class="header-buttons">
+            <a href="{{ url()->previous() }}" 
+               style="font-size: 40px; color: white; text-decoration: none; padding: 5px 15px;">
+                ←
+            </a>
+        </div>
+
+
         <div class="header-left">
             <div class="logo-wrapper">
                 <a href="/"> 
@@ -33,14 +43,17 @@
 
         <div class="header-center">
             <div class="search-bar">
-                <input type="text" class="search-input" placeholder="Busque por plantas, remédios...">
-                <button class="search-btn">🔍</button>
+                <form action="/planta" method="GET">
+                     <input type="text" id="search" name="search" type="search" description="search" class="search-input" placeholder="Busque por plantas, remédios...">
+                    <button type="submit" class="search-btn">🔍</button>
+                </form>
+               
             </div>
         </div>
 
         <nav class="nav-links">
-            <a href="{{ url('/') }}" class="nav-link">Artigos</a>
-            <a href="{{ url('/') }}" class="nav-link">Tratamentos</a>
+            <a href="{{ url('/article') }}" class="nav-link">Artigos</a>
+            <a href="{{ url('/treatment') }}" class="nav-link">Tratamentos</a>
             <a href="{{ url('/product') }}" class="nav-link">Loja</a>
         </nav>
 

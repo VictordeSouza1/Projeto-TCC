@@ -9,8 +9,24 @@ class PlantaController extends Controller
 {
     public function index()
     {
-        $plantas = Planta::all();
-        return view('planta.index', compact('plantas'));
+        $research = request('search');
+
+        if($research) {
+
+            $plantas = Planta::where(function($query) use ($research) {
+                $query->where('nome', 'like', '%'.$research.'%')
+                      ->orWhere('tipo', 'like', '%'.$research.'%')
+                      ->orWhere('descricao', 'like', '%'.$research.'%');
+            })->get();
+
+            
+
+        } else {
+
+            $plantas = Planta::all();
+        }
+        
+        return view('planta.index',['plantas' => $plantas, 'research' => $research]);
     }
 
     public function create()

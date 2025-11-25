@@ -17,6 +17,16 @@
 
     {{-- HEADER --}}
     <header class="header">
+
+        {{-- VOLTAR --}}
+
+        <div class="header-buttons">
+            <a href="{{ url()->previous() }}" 
+               style="font-size: 40px; color: white; text-decoration: none; padding: 5px 15px;">
+                ←
+            </a>
+        </div>
+
         <div class="header-left">
             <div class="logo-wrapper">
                 <a href="/">
@@ -84,7 +94,7 @@
 
                             {{-- TÍTULO = NOME DA PLANTA --}}
                             <h3 class="card-title">
-                                {{ $treatment->planta->nome ?? 'Planta não informada' }}
+                                {{ $treatment->nome ?? 'Nome não informado' }}
                             </h3>
 
                             {{-- DESCRIÇÃO --}}
