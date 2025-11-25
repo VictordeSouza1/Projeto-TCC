@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Carrinho - Natureza em Casa</title>
 
@@ -52,7 +53,7 @@
                 @forelse ($cart as $item)
                     <div class="cart-item">
 
-                        <!-- IMAGEM DO ITEM (agora com class="item-img") -->
+                        <!-- IMAGEM DO ITEM -->
                         <img src="{{ asset('storage/' . $item['imagem']) }}" 
                              class="item-img" 
                              alt="{{ $item['nome'] }}">
@@ -70,8 +71,10 @@
 
                             <form action="{{ route('cart.remove', $item['id']) }}" method="POST">
                                 @csrf
+                                @method('DELETE')
                                 <button type="submit" class="remove-btn">Remover</button>
                             </form>
+
                         </div>
                     </div>
                 @empty
@@ -107,8 +110,9 @@
                 <div class="summary-line total-line">
                     <span>Total</span>
                     <strong>R$ {{ number_format($total, 2, ',', '.') }}</strong>
-                     </div>
-                            @if ($subtotal > 0)
+                </div>
+
+                @if ($subtotal > 0)
                     <a href="{{ route('cart.checkout') }}" class="btn checkout-btn">
                         Finalizar Compra
                     </a>
