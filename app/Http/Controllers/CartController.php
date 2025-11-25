@@ -14,35 +14,38 @@ class CartController extends Controller
         return view('cart.index', compact('cart'));
     }
 
-    // Adicionar item ao carrinho
-    public function add(Request $request, $id)
-    {
-        $product = Product::find($id);
+ public function add(Request $request, $id)
+{
+    $product = Product::find($id);
 
-        if (!$product) {
-            return redirect()->back()->with('error', 'Produto não encontrado.');
-        }
-
-        $cart = session()->get('cart', []);
-
-        // Se já existe no carrinho, soma quantidade
-        if (isset($cart[$id])) {
-            $cart[$id]['quantidade'] += 1;
-        } else {
-            $cart[$id] = [
-                'id'         => $product->id, // CORRIGIDO
-                'nome'       => $product->name,
-                'descricao'  => $product->description,
-                'preco'      => $product->price,
-                'imagem'     => $product->image,
-                'quantidade' => 1,
-            ];
-        }
-
-        session()->put('cart', $cart);
-
-        return redirect()->back()->with('success', 'Produto adicionado ao carrinho!');
+    if (!$product) {
+        return response()->json(['error' => 'Produto não encontrado.'], 404);
     }
+
+    $cart = session()->get('cart', []);
+
+    if (isset($cart[$id])) {
+        $cart[$id]['quantidade'] += 1;
+    } else {
+        $cart[$id] = [
+            'id'         => $product->id,
+            'nome'       => $product->name,
+            'descricao'  => $product->description,
+            'preco'      => $product->price,
+            'imagem'     => $product->image,
+            'quantidade' => 1,
+        ];
+    }
+
+    session()->put('cart', $cart);
+
+    // 👇 ISSO resolve 100% o erro interno
+    return response()->json([
+        'success' => true,
+        'message' => 'Produto adicionado ao carrinho!'
+    ]);
+}
+
 
     // Atualizar quantidade
     public function update(Request $request, $id)
