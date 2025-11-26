@@ -33,10 +33,30 @@
         </nav>
     </div>
 
-    <div class="header-buttons">
-       <a href="{{ route('register') }}" class="header-btn">Registar</a>
-       <a href="{{ route('login') }}" class="header-btn">Entrar</a>
-    </div>
+    @guest
+        <div class="header-buttons">
+            <a href="{{ route('register') }}" class="header-btn">Registar</a>
+            <a href="{{ route('login') }}" class="header-btn">Entrar</a>
+        </div>
+    @endguest
+
+    @auth
+        <div class="header-buttons">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="header-btn">Sair</button>
+            </form>
+        </div>
+        <span class="ps-1 text-white">  
+            {{
+                Auth::user()
+                ?
+                    explode(" ", Auth::user()->name)[0]
+                :
+                    'Anônimo'
+            }}
+        </span>
+    @endauth
 </header>
 
 <main>

@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
+use App\Events\AuthenticationEvent;
+
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -28,7 +30,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Registra o Evento de Autenticação - Permissão
+        event(new AuthenticationEvent(Auth::user()->role_id));
+
+        return redirect()->intended(route('index', absolute: false));
     }
 
     /**

@@ -12,21 +12,27 @@ use Illuminate\Support\Str;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
+use Illuminate\Support\Facades\Gate;
+
 class ArticlesController extends Controller
 {
     public function index()
     {
+        Gate::authorize('viewAny', Article::class);
         $articles = Article::all();
         return view('article.index', compact('articles'));
     }
 
     public function create()
     {
+        Gate::authorize('create', Article::class);
         return view('article.create');
     }
 
     public function store(Request $request)
     {
+        Gate::authorize('create', Article::class);
+
         $request->validate([
             'title' => 'required|string|max:255',
             'author' => 'nullable|string|max:255',
@@ -71,6 +77,9 @@ class ArticlesController extends Controller
     public function show($id)
     {
         $article = Article::find($id);
+
+        Gate::authorize('view', $article);
+
         if ($article) return view('article.show', compact('article'));
 
         return redirect()->route('article.index')->with('error', 'Artigo não encontrado.');
@@ -79,6 +88,8 @@ class ArticlesController extends Controller
     public function edit($id)
     {
         $article = Article::find($id);
+        Gate::authorize('update', $article);
+        
         if ($article) return view('article.edit', compact('article'));
 
         return redirect()->route('article.index')->with('error', 'Artigo não encontrado.');
@@ -96,6 +107,8 @@ class ArticlesController extends Controller
         ]);
 
         $article = Article::find($id);
+        Gate::authorize('view', $article);
+
         if (!$article) return redirect()->route('article.index')->with('error', 'Artigo não encontrado.');
 
         $article->title = $request->title;
@@ -134,6 +147,8 @@ class ArticlesController extends Controller
     public function destroy($id)
     {
         $article = Article::find($id);
+        Gate::authorize('delete', $article);
+
         if (!$article) return redirect()->route('article.index')->with('error', 'Artigo não encontrado.');
 
         if ($article->image && Storage::disk('public')->exists($article->image)) {

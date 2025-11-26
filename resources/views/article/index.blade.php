@@ -13,7 +13,7 @@
      <link rel="stylesheet" href="{{ asset('css/imagem.css') }}">
 </head>
 
-<body>
+ncu<body>
 
     {{-- HEADER --}}
     <header class="header">
@@ -63,9 +63,11 @@
         <div class="title-row">
             <h2 class="section-title">Todos os Artigos</h2>
 
-            <a href="{{ route('article.create') }}" class="btn-add">
-                + Cadastrar Artigo
-            </a>
+            @can('create', App\Models\Article::class)
+                <a href="{{ route('article.create') }}" class="btn-add">
+                    + Cadastrar Artigo
+                </a>
+            @endcan
         </div>
 
         <div class="carousel-wrapper">
