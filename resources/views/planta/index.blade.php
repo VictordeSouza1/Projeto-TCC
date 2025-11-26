@@ -9,6 +9,7 @@
 
     {{-- CSS exclusivo desta página --}}
     <link rel="stylesheet" href="{{ asset('css/encyclopedia.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/cardPlant.css') }}">
 
     {{-- Fontes --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,34 +21,32 @@
 
     {{-- HEADER --}}
     <header class="header">
-        
+
         {{-- VOLTAR --}}
-         <div class="header-buttons">
+        <div class="header-buttons">
             <a href="{{ url()->previous() }}" 
                style="font-size: 40px; color: white; text-decoration: none; padding: 5px 15px;">
                 ←
             </a>
         </div>
 
-
         <div class="header-left">
             <div class="logo-wrapper">
                 <a href="/"> 
-                <img src="{{ asset('img/Natureza-removebg-preview.png') }}" 
-                     alt="Logo Natureza em Casa" 
-                     class="logo"
-                     style="cursor: pointer;">
-                 </a>
+                    <img src="{{ asset('img/Natureza-removebg-preview.png') }}" 
+                         alt="Logo Natureza em Casa" 
+                         class="logo">
+                </a>
             </div>
         </div>
 
         <div class="header-center">
             <div class="search-bar">
                 <form action="/planta" method="GET">
-                     <input type="text" id="search" name="search" type="search" description="search" class="search-input" placeholder="Busque por plantas, remédios...">
+                    <input type="text" id="search" name="search" class="search-input" 
+                           placeholder="Busque por plantas, remédios...">
                     <button type="submit" class="search-btn">🔍</button>
                 </form>
-               
             </div>
         </div>
 
@@ -79,8 +78,11 @@
             </a>
         </div>
 
+        {{-- CARROSSEL --}}
         <div class="carousel-wrapper">
-            <button class="carousel-btn left-btn">❮</button>
+
+            {{-- BOTÃO ESQUERDA --}}
+            <button class="carousel-btn left-btn">‹</button>
 
             <div class="carousel-container">
                 <div class="card-carousel">
@@ -90,15 +92,13 @@
 
                             {{-- IMAGEM REAL OU PADRÃO --}}
                             @if ($planta->imagem)
-                                <img 
-                                    src="{{ asset('storage/' . $planta->imagem) }}"
-                                    alt="Imagem da Planta"
-                                    class="card-image">
+                                <img src="{{ asset('storage/' . $planta->imagem) }}"
+                                     alt="Imagem da Planta"
+                                     class="card-image">
                             @else
-                                <img 
-                                    src="{{ asset('img/default-planta.jpg') }}"
-                                    alt="Imagem Padrão"
-                                    class="card-image">
+                                <img src="{{ asset('img/default-planta.jpg') }}"
+                                     alt="Imagem Padrão"
+                                     class="card-image">
                             @endif
 
                             <h3 class="card-title">{{ $planta->nome }}</h3>
@@ -106,7 +106,6 @@
 
                             {{-- AÇÕES --}}
                             <div class="card-buttons">
-
                                 <a href="{{ route('planta.show', $planta->id) }}" class="header-btn">
                                     Ver Mais
                                 </a>
@@ -122,7 +121,6 @@
                                         Remover
                                     </button>
                                 </form>
-
                             </div>
                         </div>
                     @endforeach
@@ -130,7 +128,9 @@
                 </div>
             </div>
 
-            <button class="carousel-btn right-btn">❯</button>
+            {{-- BOTÃO DIREITA --}}
+            <button class="carousel-btn right-btn">›</button>
+
         </div>
 
     </section>
@@ -173,7 +173,7 @@
     </footer>
 
     {{-- JS --}}
-    <script src="{{ asset('js/loja.js') }}"></script>
+    <script src="{{ asset('js/encyclopedia.js') }}"></script>
 
 </body>
 </html>
