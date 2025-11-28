@@ -43,10 +43,6 @@
         <a href="{{ url('/planta') }}" class="nav-link">Enciclopédia</a>
         <a href="{{ url('/product') }}" class="nav-link">Loja</a>
     </nav>
-
-    <div class="header-buttons">
-        <button class="header-btn">Login</button>
-    </div>
 </header>
 
 <main>

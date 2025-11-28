@@ -40,10 +40,6 @@
                 <a href="{{ url('/product') }}" class="nav-link">Loja</a>
             </nav>
         </div>
-
-        <div class="header-buttons">
-            <button class="header-btn">Login</button>
-        </div>
     </header>
 
     {{-- MAIN COM O MESMO FUNDO E ESTILO DA HOME --}}

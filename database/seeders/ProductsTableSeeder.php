@@ -16,7 +16,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Chá de Camomila',
                 'description' => 'Chá natural de camomila, ótimo para ansiedade, cólicas e auxílio no sono.',
-                'image' => 'pant.jpg', 
+                'image' => 'pant1.jpg', 
                 'price' => 14.90,
                 'created_at' => now(),
                 'updated_at' => now(),

@@ -68,9 +68,7 @@
             </nav>
         </div>
 
-        <div class="header-buttons">
-            <button class="header-btn">Login</button>
-        </div>
+        
     </header>
 
     {{-- MAIN --}}
