@@ -2,7 +2,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="csrf-token" content="{{ csrf_token() }}">   <!-- AQUI -->
+    <meta name="csrf-token" content="{{ csrf_token() }}"> 
 
     <title>Loja - Natureza em Casa</title>
     <link rel="icon" href="{{ asset('img/Natureza-removebg-preview.png') }}" type="image/png">
@@ -44,12 +44,17 @@
     </nav>
 
     <div class="header-buttons">
-        <button class="header-btn">Crie a sua Conta</button>
-        <button class="header-btn">Entrar</button>
+        @guest
+            <a href="{{ route('register') }}" class="header-btn btn-primary">Registar</a>
+            <a href="{{ route('login') }}" class="header-btn btn-secondary">Entrar</a>
+        @endguest
 
-        <a href="{{ route('cart.index') }}" class="header-btn cart-btn"> 🛒 </a>
+        @auth
+            <a href="{{ route('cart.index') }}" class="header-btn btn-cart">🛒</a>
+        @endauth
     </div>
 </header>
+
 
 <!-- Banner -->
 <section class="banner">
@@ -62,13 +67,15 @@
     <div class="title-row" style="display: flex; justify-content: space-between; align-items: center;">
         <h2 class="section-title">Destaque</h2>
 
-        <a href="{{ route('product.create') }}" class="btn-add">
-            + Cadastrar Produto
-        </a>
+        @can('create', App\Models\Product::class)
+                <a href="{{ route('product.create') }}" class="btn-add">
+                    + Cadastrar 
+                </a>
+            @endcan
     </div>
 
     <div class="carousel-wrapper">
-        <button class="carousel-btn left-btn">❮</button>
+        <button class="carousel-btn left-btn">‹</button>
 
         <div class="carousel-container">
             <div class="card-carousel">
@@ -106,29 +113,32 @@
 
 
                         <!-- Ver mais -->
-                        <a href="{{ route('product.show', $product->id) }}"
-                           style="flex: 1; text-align: center; padding: 8px 0; background: #1ba55c; color: white; border-radius: 5px; text-decoration: none;">
-                            Ver Mais
-                        </a>
+                        @can('view', $product)
+                            <a href="{{ route('product.show', $product->id) }}"
+                               style="flex: 1; text-align: center; padding: 8px 0; background: #1ba55c; color: white; border-radius: 5px; text-decoration: none;">
+                                Ver Mais
+                            </a>
+                        @endcan
 
                         <!-- Editar -->
-                        <a href="{{ route('product.edit', $product->id) }}"
-                           style="flex: 1; text-align: center; padding: 8px 0; background: #ffc107; color: black; border-radius: 5px; text-decoration: none;">
-                            Editar
-                        </a>
+                        @can('update', $product)
+                            <a href="{{ route('product.edit', $product->id) }}"
+                               style="flex: 1; text-align: center; padding: 8px 0; background: #ffc107; color: black; border-radius: 5px; text-decoration: none;">
+                                Editar
+                            </a>
+                        @endcan
 
                         <!-- Remover -->
-                        <form action="{{ route('product.destroy', $product->id) }}" 
-                              method="POST" 
-                              style="flex: 1; margin: 0;">
-                            @csrf
-                            @method('DELETE')
-
-                            <button type="submit"
-                                    style="width: 100%; padding: 8px 0; background: #dc3545; color: white; border-radius: 5px; border: none; cursor: pointer;">
-                                Remover
-                            </button>
-                        </form>
+                     @can('delete', $product)
+                            <form action="{{ route('product.destroy', $product->id) }}" method="POST" style="flex: 1; margin: 0;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                        style="width: 100%; padding: 8px 0; background: #dc3545; color: white; border-radius: 5px; border: none; cursor: pointer;">
+                                    Remover
+                                </button>
+                            </form>
+                        @endcan
 
                     </div>
 
@@ -138,7 +148,7 @@
             </div>
         </div>
 
-        <button class="carousel-btn right-btn">❯</button>
+        <button class="carousel-btn right-btn">›</button>
     </div>
 </section>
 

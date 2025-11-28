@@ -75,7 +75,77 @@ body {
     color: #228b22;
     transform: scale(1.05);
 }
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
+.header-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+/* Botão registrar */
+.btn-primary {
+    background-color: #1ba55c;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0e4d2b;
+}
+
+/* Botão entrar */
+.btn-secondary {
+    background-color: #ffffff;
+    color: #1ba55c;
+    border: 2px solid #1ba55c;
+}
+
+.btn-secondary:hover {
+    background-color: #1ba55c;
+    color: #fff;
+}
+
+/* Botão sair */
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #a71d2a;
+}
+
+/* Carrinho */
+.btn-cart {
+    background-color: #ffc107;
+    color: #000;
+    font-size: 18px;
+}
+
+.btn-cart:hover {
+    background-color: #e6ac00;
+}
+
+/* Nome do usuário */
+.user-name {
+    color: #fff;
+    font-weight: 500;
+    margin-left: 8px;
+}
+
+/* Logout form inline */
+.logout-form {
+    display: inline-block;
+    margin: 0;
+}
 .logo-wrapper {
     background-color: rgb(255, 255, 255);
     border-radius: 50%;

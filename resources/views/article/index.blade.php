@@ -13,19 +13,8 @@
      <link rel="stylesheet" href="{{ asset('css/imagem.css') }}">
 </head>
 
-ncu<body>
-
-    {{-- HEADER --}}
+<body>
     <header class="header">
-
-        {{-- VOLTAR --}}
-         <div class="header-buttons">
-            <a href="{{ url()->previous() }}" 
-               style="font-size: 40px; color: white; text-decoration: none; padding: 5px 15px;">
-                ←
-            </a>
-        </div>
-
         <div class="header-left">
             <div class="logo-wrapper">
                 <a href="/">
@@ -47,17 +36,18 @@ ncu<body>
             <a href="{{ url('/treatment') }}" class="nav-link">Tratamentos</a>
         </nav>
 
+        @guest
         <div class="header-buttons">
-            <button class="header-btn">Entrar</button>
+            <a href="{{ route('register') }}" class="header-btn">Registar</a>
+            <a href="{{ route('login') }}" class="header-btn">Entrar</a>
         </div>
+    @endguest
     </header>
 
-    {{-- BANNER --}}
     <section class="banner">
         <h1 class="banner-title">Artigos</h1>
     </section>
 
-    {{-- LISTAGEM --}}
     <section class="products-section">
 
         <div class="title-row">
@@ -71,7 +61,7 @@ ncu<body>
         </div>
 
         <div class="carousel-wrapper">
-            <button class="carousel-btn left-btn">❮</button>
+            <button class="carousel-btn left-btn">‹</button>
 
             <div class="carousel-container">
                 <div class="card-carousel">
@@ -102,14 +92,19 @@ ncu<body>
                             {{-- AÇÕES --}}
                             <div class="card-buttons">
 
+                                @can('view', $article)
                                 <a href="{{ route('article.show', $article->article_id) }}" class="header-btn">
                                     Ver Mais
                                 </a>
+                                @endcan
 
+                                @can('update', $article)
                                 <a href="{{ route('article.edit', $article->article_id) }}" class="header-btn btn-edit">
                                     Editar
                                 </a>
-
+                                @endcan
+                                
+                                @can('delete', $article)
                                 <form action="{{ route('article.destroy', $article->article_id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -117,6 +112,7 @@ ncu<body>
                                         Remover
                                     </button>
                                 </form>
+                                @endcan
 
                             </div>
                         </div>
@@ -125,7 +121,7 @@ ncu<body>
                 </div>
             </div>
 
-            <button class="carousel-btn right-btn">❯</button>
+            <button class="carousel-btn right-btn">›</button>
         </div>
 
     </section>

@@ -42,22 +42,18 @@
 
     @auth
         <div class="header-buttons">
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="header-btn">Sair</button>
-            </form>
         </div>
-        <span class="ps-1 text-white">  
-            {{
-                Auth::user()
-                ?
-                    explode(" ", Auth::user()->name)[0]
-                :
-                    'Anônimo'
-            }}
-        </span>
-    @endauth
-</header>
+             <a href="{{ route('profile.edit') }}" class="user-display">
+             <div class="user-avatar">
+                {{ Auth::check() ? strtoupper(substr(Auth::user()->name, 0, 1)) : 'A' }}
+             </div>
+
+                <span class="user-name">
+                    {{ Auth::check() ? Str::of(Auth::user()->name)->before(' ') : 'Anônimo' }}
+                </span>
+            </a>
+            @endauth
+    </header>
 
 <main>
     <div class="main-bg"></div>

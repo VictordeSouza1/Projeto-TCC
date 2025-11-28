@@ -4,18 +4,16 @@
     {{-- Header --}}
     <header class="header" style="margin-bottom: 1.5rem;">
         <div class="logo-wrapper">
-            <a href="{{ route('product.index') }}">
+            <a href="{{ route('index') }}">
                 <img src="{{ asset('img/Natureza-removebg-preview.png') }}" alt="Logo" class="logo">
             </a>
             <h1 style="color:var(--white); font-family:'Merriweather', serif; font-size:1.1rem;">Natureza em Casa</h1>
         </div>
 
         <div class="header-buttons">
-            <a href="{{ url()->previous() }}" class="header-btn">Voltar</a>
-
             <form method="POST" action="{{ route('logout') }}" style="display:inline;">
                 @csrf
-                <button type="submit" class="header-btn logout-btn">Sair</button>
+                <button type="submit" class="header-btn logout-btn">Sair da Conta</button>
             </form>
         </div>
     </header>
@@ -24,12 +22,6 @@
     <main class="profile-container">
         {{-- Sidebar --}}
         <aside class="sidebar">
-            <div class="profile-photo">
-                @php
-                    $photo = optional(Auth::user())->profile_photo_url ?? asset('img/perfil.jpg');
-                @endphp
-                <img src="{{ $photo }}" alt="{{ Auth::user()->name ?? 'Usuário' }}">
-            </div>
 
             <h2 style="margin-top:1rem;">{{ Auth::user()->name ?? 'Sem Nome' }}</h2>
             <p class="bio">“Cuidar do corpo é respeitar a natureza em nós.” 🍃</p>
@@ -44,14 +36,14 @@
         <section class="main-content">
             {{-- Quick actions --}}
             <div class="quick-actions">
-                <a href="#" class="action-card">
+                <a href="/article" class="action-card">
                     <div class="icon">📚</div>
                     <div class="details">
                         <h3>Artigos</h3>
                     </div>
                 </a>
 
-                <a href="#" class="action-card">
+                <a href="/planta" class="action-card">
                     <div class="icon">🌿</div>
                     <div class="details">
                         <h3>Plantas</h3>

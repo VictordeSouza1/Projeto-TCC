@@ -17,16 +17,6 @@
 
     {{-- HEADER --}}
     <header class="header">
-
-        {{-- VOLTAR --}}
-
-        <div class="header-buttons">
-            <a href="{{ url()->previous() }}" 
-               style="font-size: 40px; color: white; text-decoration: none; padding: 5px 15px;">
-                ←
-            </a>
-        </div>
-
         <div class="header-left">
             <div class="logo-wrapper">
                 <a href="/">
@@ -50,9 +40,11 @@
             <a href="{{ url('/treatment') }}" class="nav-link active">Tratamentos</a>
         </nav>
 
+        @guest
         <div class="header-buttons">
             <button class="header-btn">Entrar</button>
         </div>
+        @endguest
     </header>
 
     {{-- BANNER --}}
@@ -66,13 +58,15 @@
         <div class="title-row">
             <h2 class="section-title">Todos os Tratamentos</h2>
 
-            <a href="{{ route('treatment.create') }}" class="btn-add">
-                + Cadastrar Tratamento
-            </a>
+            @can('create', App\Models\Treatment::class)
+                <a href="{{ route('treatment.create') }}" class="btn-add">
+                    + Cadastrar 
+                </a>
+            @endcan
         </div>
 
         <div class="carousel-wrapper">
-            <button class="carousel-btn left-btn">❮</button>
+            <button class="carousel-btn left-btn">‹</button>
 
             <div class="carousel-container">
                 <div class="card-carousel">
@@ -109,17 +103,20 @@
                                 {{ $treatment->created_at->format('d/m/Y') }}
                             </p>
 
-                            {{-- BOTÕES --}}
                             <div class="card-buttons">
-
+                                @can('view', $treatment)
                                 <a href="{{ route('treatment.show', $treatment->id) }}" class="header-btn">
                                     Ver Mais
                                 </a>
+                                @endcan
 
+                                 @can('update', $treatment)
                                 <a href="{{ route('treatment.edit', $treatment->id) }}" class="header-btn btn-edit">
                                     Editar
                                 </a>
+                                 @endcan
 
+                                @can('delete', $treatment)
                                 <form action="{{ route('treatment.destroy', $treatment->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -127,6 +124,8 @@
                                         Remover
                                     </button>
                                 </form>
+
+                                @endcan
 
                             </div>
 
@@ -136,7 +135,7 @@
                 </div>
             </div>
 
-            <button class="carousel-btn right-btn">❯</button>
+            <button class="carousel-btn right-btn">›</button>
         </div>
 
     </section>

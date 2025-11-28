@@ -22,14 +22,6 @@
     {{-- HEADER --}}
     <header class="header">
 
-        {{-- VOLTAR --}}
-        <div class="header-buttons">
-            <a href="{{ url()->previous() }}" 
-               style="font-size: 40px; color: white; text-decoration: none; padding: 5px 15px;">
-                ←
-            </a>
-        </div>
-
         <div class="header-left">
             <div class="logo-wrapper">
                 <a href="/"> 
@@ -56,9 +48,12 @@
             <a href="{{ url('/product') }}" class="nav-link">Loja</a>
         </nav>
 
-        <div class="header-buttons">
-            <button class="header-btn">Entrar</button>
-        </div>
+       <div class="header-buttons">
+        @guest
+            <a href="{{ route('register') }}" class="header-btn btn-primary">Registar</a>
+            <a href="{{ route('login') }}" class="header-btn btn-secondary">Entrar</a>
+        @endguest
+    </div>
     </header>
 
     {{-- BANNER --}}
@@ -73,9 +68,11 @@
         <div class="title-row">
             <h2 class="section-title">Plantas</h2>
 
-            <a href="{{ route('planta.create') }}" class="btn-add">
-                + Cadastrar Planta
-            </a>
+            @can('create', App\Models\Planta::class)
+                <a href="{{ route('planta.create') }}" class="btn-add">
+                    + Cadastrar 
+                </a>
+            @endcan
         </div>
 
         {{-- CARROSSEL --}}
@@ -105,15 +102,20 @@
                             <p class="card-description">{{ $planta->descricao }}</p>
 
                             {{-- AÇÕES --}}
+                            @can('view', $planta)
                             <div class="card-buttons">
                                 <a href="{{ route('planta.show', $planta->id) }}" class="header-btn">
                                     Ver Mais
                                 </a>
+                                @endcan
 
+                                @can('update', $planta)
                                 <a href="{{ route('planta.edit', $planta->id) }}" class="header-btn btn-edit">
                                     Editar
                                 </a>
-
+                                @endcan
+                                
+                                @can('delete', $planta)
                                 <form action="{{ route('planta.destroy', $planta->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -121,6 +123,7 @@
                                         Remover
                                     </button>
                                 </form>
+                                @endcan
                             </div>
                         </div>
                     @endforeach
